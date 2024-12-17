@@ -29,16 +29,13 @@ brew cleanup
 
 # Define an array of packages to install using Homebrew.
 packages=(
-    "python"
-    "tcl-tk"
-    "python-tk"
+    "asdf"
     "bash"
     "zsh"
     "git"
     "tree"
     "pylint"
     "black"
-    "node"
 )
 
 # Loop over the array to install each application.
@@ -179,3 +176,18 @@ read
 
 echo "Import your Rectangle settings located in ~/dotfiles/settings/RectangleConfig.json. Press enter to continue..."
 read
+
+# Add asdf plugins
+asdf plugin add python
+asdf plugin add nodejs
+asdf plugin add ruby
+
+# Install latest versions
+asdf install python latest
+asdf install nodejs latest
+asdf install ruby latest
+
+# Set global versions
+asdf global python latest
+asdf global nodejs latest
+asdf global ruby latest

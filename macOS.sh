@@ -6,6 +6,8 @@ echo "Complete the installation of Xcode Command Line Tools before proceeding."
 echo "Press enter to continue..."
 read
 
+softwareupdate --install-rosetta --agree-to-license
+
 # Set scroll as traditional instead of natural
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 killall Finder
@@ -33,3 +35,4 @@ tell application "System Events"
     end repeat
 end tell
 EOF
+
