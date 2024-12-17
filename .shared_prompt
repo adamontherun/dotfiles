@@ -60,5 +60,5 @@ fi
 if [[ "${SSH_TTY}" ]]; then
     hostStyle="${bold}${red}"
 else
-    hostStyle="${yellow}"
+    hostStyle="${green}"
 fi
