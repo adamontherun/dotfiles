@@ -8,9 +8,11 @@ read
 
 softwareupdate --install-rosetta --agree-to-license
 
-# Set scroll as traditional instead of natural
-defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
-killall Finder
+# Show all file extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Show hidden files
+defaults write com.apple.finder AppleShowAllFiles -bool true
 
 # Add Bluetooth to Menu Bar for battery percentages
 defaults write com.apple.controlcenter "NSStatusItem Visible Bluetooth" -bool true

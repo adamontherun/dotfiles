@@ -36,6 +36,28 @@ packages=(
     "tree"
     "pylint"
     "black"
+    # Development tools
+    "git-lfs"
+    "ruby"
+    "go"
+    "postgresql@14"
+    "mysql"
+    "redis"
+    # Cloud tools
+    "render-cli"
+    "awscli"
+    # CLI utilities
+    "coreutils"
+    "curl"
+    "wget"
+    # Image processing
+    "pngquant"
+    "jpegoptim"
+    "svgo"
+    "optipng"
+    # Package managers
+    "poetry"
+    "composer"
 )
 
 # Loop over the array to install each application.
@@ -93,15 +115,27 @@ $(brew --prefix)/bin/npm install --global prettier
 
 # Define an array of applications to install using Homebrew Cask.
 apps=(
-    "google-chrome"
-    "visual-studio-code"
-    "spotify"
+    "amazon-q"
+    "android-studio"
+    "charles"
+    "db-browser-for-sqlite"
     "discord"
-    "google-drive"
-    "gimp"
-    "vlc"
+    "dotnet-sdk"
+    "flutter"
+    "github"
+    "google-chrome"
+    "microsoft-teams"
+    "ngrok"
+    "notion"
     "postman"
-    "keyboardcleantool"
+    "private-internet-access"
+    "react-native-debugger"
+    "slack"
+    "spotify"
+    "virtualbox"
+    "visual-studio-code"
+    "cursor"
+    "tableplus"
 )
 
 # Loop over the array to install each application.
@@ -185,3 +219,15 @@ asdf install ruby latest
 asdf global python latest
 asdf global nodejs latest
 asdf global ruby latest
+
+# Install Cocoapods
+echo "Installing Cocoapods..."
+gem install cocoapods --user-install
+
+# Verify installation
+if ! command -v pod &>/dev/null; then
+    echo "Cocoapods installation failed. Please check Ruby configuration."
+    exit 1
+else
+    echo "Cocoapods installed successfully."
+fi
