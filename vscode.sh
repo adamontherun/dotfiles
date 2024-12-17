@@ -5,38 +5,6 @@ if [ -x "/opt/homebrew/bin/brew" ] && [[ ":$PATH:" != *":/opt/homebrew/bin:"* ]]
     export PATH="/opt/homebrew/bin:$PATH"
 fi
 
-# Install VS Code Extensions
-extensions=(
-    esbenp.prettier-vscode
-    formulahendry.code-runner
-    foxundermoon.shell-format
-    mechatroner.rainbow-csv
-    ms-python.black-formatter
-    ms-python.isort
-    ms-python.pylint
-    ms-python.python
-    ms-toolsai.jupyter
-    ms-vscode.theme-predawnkit
-    mtxr.sqltools
-    mtxr.sqltools-driver-sqlite
-    teabyii.ayu
-    tomoki1207.pdf
-)
-
-# Get a list of all currently installed extensions.
-installed_extensions=$(code --list-extensions)
-
-for extension in "${extensions[@]}"; do
-    if echo "$installed_extensions" | grep -qi "^$extension$"; then
-        echo "$extension is already installed. Skipping..."
-    else
-        echo "Installing $extension..."
-        code --install-extension "$extension"
-    fi
-done
-
-echo "VS Code extensions have been installed."
-
 # Define the target directory for VS Code user settings on macOS
 VSCODE_USER_SETTINGS_DIR="${HOME}/Library/Application Support/Code/User"
 

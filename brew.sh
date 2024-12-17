@@ -38,11 +38,10 @@ packages=(
     "black"
     # Development tools
     "git-lfs"
-    "ruby"
-    "go"
     "postgresql@14"
     "mysql"
     "redis"
+    "dart"
     # Cloud tools
     "render-cli"
     "awscli"
@@ -120,6 +119,7 @@ apps=(
     "charles"
     "db-browser-for-sqlite"
     "discord"
+    "docker"
     "dotnet-sdk"
     "flutter"
     "github"
@@ -197,12 +197,6 @@ echo "Sign in to Spotify. Press enter to continue..."
 read
 
 echo "Sign in to Discord. Press enter to continue..."
-read
-
-echo "Open Rectangle and give it necessary permissions. Press enter to continue..."
-read
-
-echo "Import your Rectangle settings located in ~/dotfiles/settings/RectangleConfig.json. Press enter to continue..."
 read
 
 # Add asdf plugins
