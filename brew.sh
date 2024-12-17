@@ -39,6 +39,7 @@ packages=(
     # Development tools
     "git-lfs"
     "postgresql@14"
+    "cocoapods"
     "mysql"
     "redis"
     "dart"
