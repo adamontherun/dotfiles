@@ -87,25 +87,19 @@ else
     echo "Git user.email is already set to '$current_email'. Skipping configuration."
 fi
 
-# Create the tutorial virtual environment I use frequently
-$(brew --prefix)/bin/python3 -m venv "${HOME}/tutorial"
 
-# Install Prettier, which I use in both VS Code and Sublime Text
+# Install Prettier, which I use in VS Code
 $(brew --prefix)/bin/npm install --global prettier
 
 # Define an array of applications to install using Homebrew Cask.
 apps=(
     "google-chrome"
-    "firefox"
-    "brave-browser"
-    "sublime-text"
     "visual-studio-code"
     "spotify"
     "discord"
     "google-drive"
     "gimp"
     "vlc"
-    "rectangle"
     "postman"
     "keyboardcleantool"
 )
