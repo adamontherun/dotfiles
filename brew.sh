@@ -137,6 +137,7 @@ apps=(
     "visual-studio-code"
     "cursor"
     "tableplus"
+    "zoom"
 )
 
 # Loop over the array to install each application.
