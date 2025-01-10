@@ -27,6 +27,14 @@ brew upgrade
 brew upgrade --cask
 brew cleanup
 
+# Add the HashiCorp tap if not already added
+if ! brew tap | grep -q "^hashicorp/tap$"; then
+    echo "Tapping HashiCorp repository..."
+    brew tap hashicorp/tap
+else
+    echo "HashiCorp repository is already tapped. Skipping..."
+fi
+
 # Define an array of packages to install using Homebrew.
 packages=(
     "asdf"
@@ -37,6 +45,7 @@ packages=(
     "pylint"
     "black"
     # Development tools
+    "hashicorp/tap/terraform"
     "git-lfs"
     "postgresql@14"
     "cocoapods"
