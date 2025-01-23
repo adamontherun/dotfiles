@@ -44,6 +44,7 @@ packages=(
     "tree"
     "pylint"
     "black"
+    "obs"
     # Development tools
     "hashicorp/tap/terraform"
     "git-lfs"
