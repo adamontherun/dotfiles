@@ -53,6 +53,7 @@ packages=(
     "mysql"
     "redis"
     "dart"
+    "dbeaver-community"
     # Cloud tools
     "render-cli"
     "awscli"
