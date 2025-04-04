@@ -54,6 +54,7 @@ packages=(
     "redis"
     "dart"
     "dbeaver-community"
+    "microsoft-excel"
     # Cloud tools
     "render-cli"
     "awscli"
