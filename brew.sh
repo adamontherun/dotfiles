@@ -55,6 +55,7 @@ packages=(
     "dart"
     "dbeaver-community"
     "microsoft-excel"
+    "neo4j"
     # Cloud tools
     "render-cli"
     "awscli"
