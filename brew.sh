@@ -59,6 +59,7 @@ packages=(
     # Cloud tools
     "render-cli"
     "awscli"
+    "rclone"
     # CLI utilities
     "coreutils"
     "curl"
