@@ -59,7 +59,6 @@ packages=(
     # Cloud tools
     "render-cli"
     "awscli"
-    "rclone"
     # CLI utilities
     "coreutils"
     "curl"
@@ -72,6 +71,7 @@ packages=(
     # Package managers
     "poetry"
     "composer"
+    "wally"
 )
 
 # Loop over the array to install each application.
