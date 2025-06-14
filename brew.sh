@@ -72,6 +72,7 @@ packages=(
     "poetry"
     "composer"
     "wally"
+    "foreman"
 )
 
 # Loop over the array to install each application.
