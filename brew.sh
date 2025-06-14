@@ -71,8 +71,6 @@ packages=(
     # Package managers
     "poetry"
     "composer"
-    "wally"
-    "foreman"
 )
 
 # Loop over the array to install each application.
