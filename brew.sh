@@ -94,7 +94,7 @@ else
 fi
 
 # Git config name
-current_name=$($(brew --prefix)/bin/git config --global --get user.name)
+current_name=$($(brew --prefix)/bin/git config --global --get user.name 2>/dev/null || echo "")
 if [ -z "$current_name" ]; then
     echo "Please enter your FULL NAME for Git configuration:"
     read -r git_user_name
@@ -105,7 +105,7 @@ else
 fi
 
 # Git config email
-current_email=$($(brew --prefix)/bin/git config --global --get user.email)
+current_email=$($(brew --prefix)/bin/git config --global --get user.email 2>/dev/null || echo "")
 if [ -z "$current_email" ]; then
     echo "Please enter your EMAIL for Git configuration:"
     read -r git_user_email
