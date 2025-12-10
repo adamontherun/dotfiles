@@ -224,6 +224,9 @@ asdf global ruby latest
 # Install Prettier (requires Node.js from asdf)
 npm install --global prettier
 
+# Install Claude Code (requires Node.js from asdf)
+npm install --global @anthropic-ai/claude-code
+
 # Install Cocoapods
 echo "Installing Cocoapods..."
 gem install cocoapods --user-install

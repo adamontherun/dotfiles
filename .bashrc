@@ -1,13 +1,9 @@
-[ -f ~/.aliases ] && source ~/.aliases
-[ -f ~/.private ] && source ~/.private
-[ -f ~/.bash_prompt ] && source ~/.bash_prompt
+[[ $- != *i* ]] && return
 
-export PATH="$HOME/.local/bin:$PATH"
+for file in ~/.{bash_prompt,aliases,private}; do
+    [ -r "$file" ] && [ -f "$file" ] && source "$file"
+done
+unset file
 
-if command -v brew &>/dev/null; then
-    export PATH="$(brew --prefix)/bin:$(brew --prefix)/sbin:$PATH"
-fi
-
-if [ -f ~/.asdf/asdf.sh ]; then
-    source ~/.asdf/asdf.sh
-fi
+[[ -f "$HOME/.rokit/env" ]] && . "$HOME/.rokit/env"
+[[ -f "$HOME/.aftman/env" ]] && . "$HOME/.aftman/env"

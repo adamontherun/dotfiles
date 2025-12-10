@@ -1,5 +1,16 @@
-autoload -Uz vcs_info
-precmd() { vcs_info }
-zstyle ':vcs_info:git:*' formats ' (%b)'
-setopt PROMPT_SUBST
-PROMPT='%F{green}%n@%m%f %F{blue}%~%f%F{red}${vcs_info_msg_0_}%f $ '
+source "${HOME}/dotfiles/.shared_prompt"
+
+PS1="\$(prompt_venv)"
+PS1+="%{${bold}%}"$'\n'
+PS1+="%{${userStyle}%}%n"
+PS1+="%{${white}%} at "
+PS1+="%{${hostStyle}%}%m"
+PS1+="%{${white}%} in "
+PS1+="%{${green}%}%c"
+PS1+="\$(prompt_git)"
+PS1+=$'\n'
+PS1+="%{${white}%}\$ %{${reset}%}"
+export PS1
+
+PS2="%{${yellow}%}→ %{${reset}%}"
+export PS2
