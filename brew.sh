@@ -116,6 +116,25 @@ else
     echo "Git user.email is already set to '$current_email'. Skipping configuration."
 fi
 
+# Git global defaults
+$(brew --prefix)/bin/git config --global init.defaultBranch main
+$(brew --prefix)/bin/git config --global pull.rebase false
+$(brew --prefix)/bin/git config --global core.editor "code --wait"
+
+# SSH key generation
+if [ ! -f ~/.ssh/id_ed25519 ]; then
+    echo "Generating SSH key for GitHub..."
+    ssh-keygen -t ed25519 -C "$current_email" -f ~/.ssh/id_ed25519 -N ""
+    echo "SSH key generated at ~/.ssh/id_ed25519"
+    echo "Add this public key to GitHub:"
+    cat ~/.ssh/id_ed25519.pub
+    echo ""
+    echo "Press enter to continue..."
+    read -r
+else
+    echo "SSH key already exists. Skipping generation."
+fi
+
 
 # Define an array of applications to install using Homebrew Cask.
 apps=(
@@ -145,7 +164,6 @@ apps=(
     "tableplus"
     "virtualbox"
     "visual-studio-code"
-    "cursor"
     "zoom"
 )
 
@@ -194,22 +212,18 @@ brew upgrade
 brew upgrade --cask
 brew cleanup
 
-echo "Sign in to Google Chrome. Press enter to continue..."
-read -r
-
-echo "Connect Google Account (System Settings -> Internet Accounts). Press enter to continue..."
-read -r
-
-echo "Sign in to Spotify. Press enter to continue..."
-read -r
-
-echo "Sign in to Discord. Press enter to continue..."
+echo "Please sign in to your apps:"
+echo "- Google Chrome"
+echo "- Connect Google Account (System Settings -> Internet Accounts)"
+echo "- Spotify"
+echo "- Discord"
+echo "Press enter when finished..."
 read -r
 
 # Add asdf plugins
-asdf plugin add python
-asdf plugin add nodejs
-asdf plugin add ruby
+asdf plugin add python || true
+asdf plugin add nodejs || true
+asdf plugin add ruby || true
 
 # Install latest versions
 asdf install python latest
