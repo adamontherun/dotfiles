@@ -1,9 +1,14 @@
 #!/usr/bin/env zsh
 set -e
 
+play_notification() {
+    afplay /System/Library/Sounds/Glass.aiff 2>/dev/null || true
+}
+
 if ! xcode-select -p &>/dev/null; then
     xcode-select --install
     echo "Complete the installation of Xcode Command Line Tools before proceeding."
+    play_notification
     echo "Press enter to continue..."
     read -r
 else

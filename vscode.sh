@@ -1,6 +1,10 @@
 #!/usr/bin/env zsh
 set -e
 
+play_notification() {
+    afplay /System/Library/Sounds/Glass.aiff 2>/dev/null || true
+}
+
 dotfiledir="$(cd "$(dirname "$0")" && pwd)"
 
 if [ -x "/opt/homebrew/bin/brew" ] && [[ ":$PATH:" != *":/opt/homebrew/bin:"* ]]; then
@@ -19,5 +23,6 @@ fi
 
 code .
 echo "Login to extensions (Copilot, Grammarly, etc) within VS Code."
+play_notification
 echo "Press enter to continue..."
 read -r

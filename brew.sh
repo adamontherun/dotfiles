@@ -1,11 +1,16 @@
 #!/usr/bin/env zsh
 set -e
 
+play_notification() {
+    afplay /System/Library/Sounds/Glass.aiff 2>/dev/null || true
+}
+
 dotfiledir="$(cd "$(dirname "$0")" && pwd)"
 
 # Install Homebrew if it isn't already installed
 if ! command -v brew &>/dev/null; then
     echo "Homebrew not installed. Installing Homebrew."
+    play_notification
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
     # Attempt to set up Homebrew PATH automatically for this session
@@ -84,9 +89,11 @@ if [ "$SHELL" != "$BREW_ZSH" ]; then
     # Check if Homebrew's zsh is already in allowed shells
     if ! grep -Fxq "$BREW_ZSH" /etc/shells; then
         echo "Adding Homebrew zsh to allowed shells"
+        play_notification
         echo "$BREW_ZSH" | sudo tee -a /etc/shells >/dev/null
     fi
     # Set the Homebrew zsh as default shell
+    play_notification
     chsh -s "$BREW_ZSH"
     echo "Default shell changed to Homebrew zsh."
 else
@@ -96,6 +103,7 @@ fi
 # Git config name
 current_name=$($(brew --prefix)/bin/git config --global --get user.name 2>/dev/null || echo "")
 if [ -z "$current_name" ]; then
+    play_notification
     echo "Please enter your FULL NAME for Git configuration:"
     read -r git_user_name
     $(brew --prefix)/bin/git config --global user.name "$git_user_name"
@@ -107,6 +115,7 @@ fi
 # Git config email
 current_email=$($(brew --prefix)/bin/git config --global --get user.email 2>/dev/null || echo "")
 if [ -z "$current_email" ]; then
+    play_notification
     echo "Please enter your EMAIL for Git configuration:"
     read -r git_user_email
     $(brew --prefix)/bin/git config --global user.email "$git_user_email"
@@ -128,6 +137,7 @@ if [ ! -f ~/.ssh/id_ed25519 ]; then
     echo "Add this public key to GitHub:"
     cat ~/.ssh/id_ed25519.pub
     echo ""
+    play_notification
     echo "Press enter to continue..."
     read -r
 else
@@ -197,6 +207,7 @@ done
 echo "Import your terminal settings..."
 echo "Terminal -> Settings -> Profiles -> Import..."
 echo "Import from ${dotfiledir}/settings/CMS.terminal"
+play_notification
 echo "Press enter to continue..."
 read -r
 
@@ -210,6 +221,7 @@ echo "Please sign in to your apps:"
 echo "- Google Chrome"
 echo "- Connect Google Account (System Settings -> Internet Accounts)"
 echo "- Discord"
+play_notification
 echo "Press enter when finished..."
 read -r
 
