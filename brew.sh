@@ -72,6 +72,8 @@ packages=(
     "poetry"
     "composer"
     "uv"
+    #ai tools
+    "granola"
 )
 
 # Loop over the array to install each application.
