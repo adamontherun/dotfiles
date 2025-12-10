@@ -40,7 +40,7 @@
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.quickSuggestionsDelay": 200,
-  "editor.dragAndDrop": false
+  "editor.dragAndDrop": false,
   "editor.minimap.enabled": false,
   "diffEditor.useInlineViewWhenSpaceIsLimited": false,
 

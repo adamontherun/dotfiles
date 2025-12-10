@@ -1,4 +1,7 @@
 #!/usr/bin/env zsh
+set -e
+
+dotfiledir="$(cd "$(dirname "$0")" && pwd)"
 
 # Install Homebrew if it isn't already installed
 if ! command -v brew &>/dev/null; then
@@ -44,36 +47,24 @@ packages=(
     "tree"
     "pylint"
     "black"
-    "obs"
-    # Development tools
     "hashicorp/tap/terraform"
     "git-lfs"
     "postgresql@14"
-    "cocoapods"
     "mysql"
     "redis"
     "dart"
-    "dbeaver-community"
-    "microsoft-excel"
-    "neo4j"
-    # Cloud tools
     "render-cli"
     "awscli"
-    # CLI utilities
     "coreutils"
     "curl"
     "wget"
-    # Image processing
     "pngquant"
     "jpegoptim"
     "svgo"
     "optipng"
-    # Package managers
     "poetry"
     "composer"
     "uv"
-    #ai tools
-    "granola"
 )
 
 # Loop over the array to install each application.
@@ -107,7 +98,7 @@ fi
 current_name=$($(brew --prefix)/bin/git config --global --get user.name)
 if [ -z "$current_name" ]; then
     echo "Please enter your FULL NAME for Git configuration:"
-    read git_user_name
+    read -r git_user_name
     $(brew --prefix)/bin/git config --global user.name "$git_user_name"
     echo "Git user.name has been set to $git_user_name"
 else
@@ -118,7 +109,7 @@ fi
 current_email=$($(brew --prefix)/bin/git config --global --get user.email)
 if [ -z "$current_email" ]; then
     echo "Please enter your EMAIL for Git configuration:"
-    read git_user_email
+    read -r git_user_email
     $(brew --prefix)/bin/git config --global user.email "$git_user_email"
     echo "Git user.email has been set to $git_user_email"
 else
@@ -126,33 +117,35 @@ else
 fi
 
 
-# Install Prettier, which I use in VS Code
-$(brew --prefix)/bin/npm install --global prettier
-
 # Define an array of applications to install using Homebrew Cask.
 apps=(
     "amazon-q"
     "android-studio"
     "charles"
     "db-browser-for-sqlite"
+    "dbeaver-community"
     "discord"
     "docker"
     "dotnet-sdk"
     "flutter"
     "github"
     "google-chrome"
+    "granola"
+    "microsoft-excel"
     "microsoft-teams"
+    "neo4j"
     "ngrok"
     "notion"
+    "obs"
     "postman"
     "private-internet-access"
     "react-native-debugger"
     "slack"
     "spotify"
+    "tableplus"
     "virtualbox"
     "visual-studio-code"
     "cursor"
-    "tableplus"
     "zoom"
 )
 
@@ -165,10 +158,6 @@ for app in "${apps[@]}"; do
         brew install --cask "$app"
     fi
 done
-
-# Install fonts
-# Tap the Homebrew font cask repository if not already tapped
-brew tap | grep -q "^homebrew/cask-fonts$" || brew tap homebrew/cask-fonts
 
 fonts=(
     "font-source-code-pro"
@@ -195,9 +184,9 @@ done
 # Once fonts are installed, import your Terminal Profile
 echo "Import your terminal settings..."
 echo "Terminal -> Settings -> Profiles -> Import..."
-echo "Import from ${HOME}/dotfiles/settings/Pro.terminal"
+echo "Import from ${dotfiledir}/settings/CMS.terminal"
 echo "Press enter to continue..."
-read
+read -r
 
 # Update and clean up again for safe measure
 brew update
@@ -206,16 +195,16 @@ brew upgrade --cask
 brew cleanup
 
 echo "Sign in to Google Chrome. Press enter to continue..."
-read
+read -r
 
 echo "Connect Google Account (System Settings -> Internet Accounts). Press enter to continue..."
-read
+read -r
 
 echo "Sign in to Spotify. Press enter to continue..."
-read
+read -r
 
 echo "Sign in to Discord. Press enter to continue..."
-read
+read -r
 
 # Add asdf plugins
 asdf plugin add python
@@ -231,6 +220,9 @@ asdf install ruby latest
 asdf global python latest
 asdf global nodejs latest
 asdf global ruby latest
+
+# Install Prettier (requires Node.js from asdf)
+npm install --global prettier
 
 # Install Cocoapods
 echo "Installing Cocoapods..."

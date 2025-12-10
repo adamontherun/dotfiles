@@ -1,10 +1,14 @@
 #!/usr/bin/env zsh
+set -e
 
-xcode-select --install
-
-echo "Complete the installation of Xcode Command Line Tools before proceeding."
-echo "Press enter to continue..."
-read
+if ! xcode-select -p &>/dev/null; then
+    xcode-select --install
+    echo "Complete the installation of Xcode Command Line Tools before proceeding."
+    echo "Press enter to continue..."
+    read -r
+else
+    echo "Xcode Command Line Tools already installed. Skipping..."
+fi
 
 softwareupdate --install-rosetta --agree-to-license
 

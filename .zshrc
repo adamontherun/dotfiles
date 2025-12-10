@@ -1,17 +1,13 @@
-autoload -Uz colors && colors
-setopt PROMPT_SUBST
+[ -f ~/.aliases ] && source ~/.aliases
+[ -f ~/.private ] && source ~/.private
+[ -f ~/.zprompt ] && source ~/.zprompt
 
-# Don't ask if user is sure when running rm with wildcards (like bash)
-setopt rmstarsilent
+export PATH="$HOME/.local/bin:$PATH"
 
-# If wildcard pattern has no matches, return an empty string (like bash)
-setopt no_nomatch
+if command -v brew &>/dev/null; then
+    export PATH="$(brew --prefix)/bin:$(brew --prefix)/sbin:$PATH"
+fi
 
-# Load dotfiles:
-for file in ~/.{zprompt,aliases,private}; do
-    [ -r "$file" ] && [ -f "$file" ] && source "$file"
-done
-unset file
-
-# Initialize asdf
-. "$(brew --prefix asdf)/libexec/asdf.sh"
+if [ -f ~/.asdf/asdf.sh ]; then
+    source ~/.asdf/asdf.sh
+fi

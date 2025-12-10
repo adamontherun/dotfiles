@@ -72,11 +72,6 @@
   },
   {
     "key": "ctrl+cmd+l",
-    "command": "editor.action.selectAllMatches",
-    "when": "editorFocus"
-  },
-  {
-    "key": "ctrl+cmd+l",
     "command": "editor.action.selectHighlights",
     "when": "editorFocus"
   }

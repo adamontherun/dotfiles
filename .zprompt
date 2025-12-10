@@ -1,17 +1,5 @@
-
-source "${HOME}/dotfiles/.shared_prompt"
-
-PS1="\$(prompt_venv)" # virtual environment
-PS1+="%{${bold}%}"$'\n' # newline
-PS1+="%{${userStyle}%}%n" # username
-PS1+="%{${white}%} at "
-PS1+="%{${hostStyle}%}%m" # host
-PS1+="%{${white}%} in "
-PS1+="%{${green}%}%c" # working directory
-PS1+="\$(prompt_git)" # Git repository details
-PS1+=$'\n'
-PS1+="%{${white}%}\$ %{${reset}%}" # `$` (and reset color)
-export PS1
-
-PS2="%{${yellow}%}→ %{${reset}%}"
-export PS2
+autoload -Uz vcs_info
+precmd() { vcs_info }
+zstyle ':vcs_info:git:*' formats ' (%b)'
+setopt PROMPT_SUBST
+PROMPT='%F{green}%n@%m%f %F{blue}%~%f%F{red}${vcs_info_msg_0_}%f $ '
