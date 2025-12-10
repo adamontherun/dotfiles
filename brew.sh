@@ -69,6 +69,7 @@ packages=(
     "poetry"
     "composer"
     "uv"
+    "libyaml"
 )
 
 # Loop over the array to install each application.
@@ -231,29 +232,28 @@ asdf plugin add nodejs || true
 asdf plugin add ruby || true
 
 # Install latest versions
-asdf install python latest
-asdf install nodejs latest
-asdf install ruby latest
+asdf install python latest || echo "Warning: Failed to install Python. Continuing..."
+asdf install nodejs latest || echo "Warning: Failed to install Node.js. Continuing..."
+asdf install ruby latest || echo "Warning: Failed to install Ruby. Continuing..."
 
-# Set global versions
-asdf global python latest
-asdf global nodejs latest
-asdf global ruby latest
+# Set global versions (only if installed)
+asdf global python latest 2>/dev/null || true
+asdf global nodejs latest 2>/dev/null || true
+asdf global ruby latest 2>/dev/null || true
 
 # Install Prettier (requires Node.js from asdf)
-npm install --global prettier
+npm install --global prettier || echo "Warning: Failed to install Prettier. Continuing..."
 
 # Install Claude Code (requires Node.js from asdf)
-npm install --global @anthropic-ai/claude-code
+npm install --global @anthropic-ai/claude-code || echo "Warning: Failed to install Claude Code. Continuing..."
 
 # Install Cocoapods
 echo "Installing Cocoapods..."
-gem install cocoapods --user-install
+gem install cocoapods --user-install || echo "Warning: Failed to install Cocoapods. Continuing..."
 
 # Verify installation
 if ! command -v pod &>/dev/null; then
-    echo "Cocoapods installation failed. Please check Ruby configuration."
-    exit 1
+    echo "Warning: Cocoapods not available. You may need to install Ruby first."
 else
     echo "Cocoapods installed successfully."
 fi
