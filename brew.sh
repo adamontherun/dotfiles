@@ -53,7 +53,6 @@ packages=(
     "mysql"
     "redis"
     "dart-sdk"
-    "render-cli"
     "awscli"
     "coreutils"
     "curl"
@@ -73,7 +72,7 @@ for package in "${packages[@]}"; do
         echo "$package is already installed. Skipping..."
     else
         echo "Installing $package..."
-        brew install "$package"
+        brew install "$package" || echo "Warning: Failed to install $package. Continuing..."
     fi
 done
 
@@ -150,7 +149,6 @@ apps=(
     "github"
     "google-chrome"
     "granola"
-    "microsoft-excel"
     "microsoft-teams"
     "neo4j"
     "ngrok"
@@ -158,8 +156,6 @@ apps=(
     "obs"
     "postman"
     "react-native-debugger"
-    "slack"
-    "spotify"
     "tableplus"
     "virtualbox"
     "visual-studio-code"
@@ -172,7 +168,7 @@ for app in "${apps[@]}"; do
         echo "$app is already installed. Skipping..."
     else
         echo "Installing $app..."
-        brew install --cask "$app"
+        brew install --cask "$app" || echo "Warning: Failed to install $app. Continuing..."
     fi
 done
 
@@ -194,7 +190,7 @@ for font in "${fonts[@]}"; do
         echo "$font is already installed. Skipping..."
     else
         echo "Installing $font..."
-        brew install --cask "$font"
+        brew install --cask "$font" || echo "Warning: Failed to install $font. Continuing..."
     fi
 done
 
@@ -214,7 +210,6 @@ brew cleanup
 echo "Please sign in to your apps:"
 echo "- Google Chrome"
 echo "- Connect Google Account (System Settings -> Internet Accounts)"
-echo "- Spotify"
 echo "- Discord"
 echo "Press enter when finished..."
 read -r
