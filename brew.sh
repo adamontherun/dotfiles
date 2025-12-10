@@ -137,7 +137,6 @@ fi
 
 # Define an array of applications to install using Homebrew Cask.
 apps=(
-    "amazon-q"
     "android-studio"
     "charles"
     "db-browser-for-sqlite"
