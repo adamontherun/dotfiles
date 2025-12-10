@@ -49,7 +49,7 @@ packages=(
     "black"
     "hashicorp/tap/terraform"
     "git-lfs"
-    "postgresql@14"
+    "postgresql@16"
     "mysql"
     "redis"
     "dart"
