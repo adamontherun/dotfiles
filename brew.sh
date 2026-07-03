@@ -21,54 +21,12 @@ if ! command -v brew &>/dev/null; then
     exit 1
 fi
 
-# Update Homebrew and Upgrade any already-installed formulae
+# Install everything listed in Brewfile (taps, formulae, casks, VS Code
+# extensions, npm/uv globals). Regenerate this file with:
+#   brew bundle dump --file=Brewfile --force
 brew update
-brew upgrade
-brew upgrade --cask
+brew bundle install --file="$(dirname "$0")/Brewfile"
 brew cleanup
-
-# Define an array of packages to install using Homebrew.
-packages=(
-    "asdf"
-    "bash"
-    "zsh"
-    "git"
-    "tree"
-    "pylint"
-    "black"
-    # Development tools
-    "git-lfs"
-    "postgresql@14"
-    "cocoapods"
-    "mysql"
-    "redis"
-    "dart"
-    # Cloud tools
-    "render-cli"
-    "awscli"
-    # CLI utilities
-    "coreutils"
-    "curl"
-    "wget"
-    # Image processing
-    "pngquant"
-    "jpegoptim"
-    "svgo"
-    "optipng"
-    # Package managers
-    "poetry"
-    "composer"
-)
-
-# Loop over the array to install each application.
-for package in "${packages[@]}"; do
-    if brew list --formula | grep -q "^$package\$"; then
-        echo "$package is already installed. Skipping..."
-    else
-        echo "Installing $package..."
-        brew install "$package"
-    fi
-done
 
 # Get the path to Homebrew's zsh
 BREW_ZSH="$(brew --prefix)/bin/zsh"
@@ -109,112 +67,13 @@ else
     echo "Git user.email is already set to '$current_email'. Skipping configuration."
 fi
 
-
 # Install Prettier, which I use in VS Code
 $(brew --prefix)/bin/npm install --global prettier
 
-# Define an array of applications to install using Homebrew Cask.
-apps=(
-    "amazon-q"
-    "android-studio"
-    "charles"
-    "db-browser-for-sqlite"
-    "discord"
-    "docker"
-    "dotnet-sdk"
-    "flutter"
-    "github"
-    "google-chrome"
-    "microsoft-teams"
-    "ngrok"
-    "notion"
-    "postman"
-    "private-internet-access"
-    "react-native-debugger"
-    "slack"
-    "spotify"
-    "virtualbox"
-    "visual-studio-code"
-    "cursor"
-    "tableplus"
-    "zoom"
-)
-
-# Loop over the array to install each application.
-for app in "${apps[@]}"; do
-    if brew list --cask | grep -q "^$app\$"; then
-        echo "$app is already installed. Skipping..."
-    else
-        echo "Installing $app..."
-        brew install --cask "$app"
-    fi
+# Add asdf plugins (versions themselves are pinned in ~/.tool-versions)
+for plugin in python nodejs ruby rust; do
+    asdf plugin add "$plugin" 2>/dev/null || true
 done
-
-# Install fonts
-# Tap the Homebrew font cask repository if not already tapped
-brew tap | grep -q "^homebrew/cask-fonts$" || brew tap homebrew/cask-fonts
-
-fonts=(
-    "font-source-code-pro"
-    "font-lato"
-    "font-montserrat"
-    "font-nunito"
-    "font-open-sans"
-    "font-oswald"
-    "font-poppins"
-    "font-raleway"
-    "font-roboto"
-)
-
-for font in "${fonts[@]}"; do
-    # Check if the font is already installed
-    if brew list --cask | grep -q "^$font\$"; then
-        echo "$font is already installed. Skipping..."
-    else
-        echo "Installing $font..."
-        brew install --cask "$font"
-    fi
-done
-
-# Once fonts are installed, import your Terminal Profile
-echo "Import your terminal settings..."
-echo "Terminal -> Settings -> Profiles -> Import..."
-echo "Import from ${HOME}/dotfiles/settings/Pro.terminal"
-echo "Press enter to continue..."
-read
-
-# Update and clean up again for safe measure
-brew update
-brew upgrade
-brew upgrade --cask
-brew cleanup
-
-echo "Sign in to Google Chrome. Press enter to continue..."
-read
-
-echo "Connect Google Account (System Settings -> Internet Accounts). Press enter to continue..."
-read
-
-echo "Sign in to Spotify. Press enter to continue..."
-read
-
-echo "Sign in to Discord. Press enter to continue..."
-read
-
-# Add asdf plugins
-asdf plugin add python
-asdf plugin add nodejs
-asdf plugin add ruby
-
-# Install latest versions
-asdf install python latest
-asdf install nodejs latest
-asdf install ruby latest
-
-# Set global versions
-asdf global python latest
-asdf global nodejs latest
-asdf global ruby latest
 
 # Install Cocoapods
 echo "Installing Cocoapods..."
