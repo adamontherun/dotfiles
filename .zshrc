@@ -35,7 +35,9 @@ done
 unset file
 
 # asdf version manager (installed via Homebrew)
-. $(brew --prefix asdf)/libexec/asdf.sh
+if command -v brew &>/dev/null; then
+    . $(brew --prefix asdf)/libexec/asdf.sh
+fi
 
 # Aliases
 alias claudeyolo='claude --dangerously-skip-permissions'

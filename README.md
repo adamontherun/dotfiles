@@ -2,6 +2,8 @@
 
 Personal macOS dotfiles — shell config, VS Code settings, and a Homebrew package list, managed with plain symlinks (no dotfile-manager framework).
 
+**Note:** these are **highly personalized**. If you found this by way of the fork chain below, I'd encourage forking and adjusting rather than running it as-is — it will modify your shell config, macOS defaults, and installed software.
+
 ## What this manages
 
 - **zsh** (daily-driver shell): `.zshrc`, `.zprofile`, `.zprompt`
@@ -10,9 +12,9 @@ Personal macOS dotfiles — shell config, VS Code settings, and a Homebrew packa
 - **Aliases**: `.aliases`
 - **Homebrew packages/casks/VS Code extensions/npm & uv globals**: `Brewfile`
 - **VS Code settings/keybindings**: `settings/VSCode-Settings.json`, `settings/VSCode-Keybindings.json`
-- **A few macOS system defaults**: `macOS.sh` (Finder show-all-files/extensions, Xcode CLI tools, Rosetta)
+- **macOS system defaults**: `macOS.sh` (Finder, Dock, keyboard repeat rate, screenshot location, scroll direction, Xcode CLI tools, Rosetta)
 
-This repo does **not** manage: git identity (`~/.gitconfig` — `brew.sh` prompts for name/email once, only if unset), any secrets (see `.private` below), Cursor's settings (installed, but unmanaged here), or Docker Desktop/Xcode app-level preferences.
+This repo does **not** manage Cursor's settings (installed, but unmanaged here) or Docker Desktop/Xcode app-level preferences.
 
 ## Fresh-machine bootstrap
 
@@ -24,7 +26,11 @@ cd ~/dotfiles
 ./install.sh
 ```
 
-This symlinks the dotfiles into `$HOME`, runs `macOS.sh`, installs everything in `Brewfile` via `brew bundle`, and symlinks the VS Code settings.
+This symlinks the dotfiles into `$HOME`, runs `macOS.sh`, installs everything in `Brewfile` via `brew bundle` and sets Homebrew's zsh as the default shell, then symlinks the VS Code settings. Along the way it will prompt you to:
+- enter your name/email for git (skipped if already set)
+- generate an SSH key for GitHub if you don't have one at `~/.ssh/id_ed25519` (prints the public key to add to GitHub)
+
+It also sets a few git defaults: `init.defaultBranch main`, `pull.rebase false`, `core.editor "code --wait"`.
 
 ## Secrets (`.private`)
 
@@ -46,7 +52,16 @@ cd ~/dotfiles
 brew bundle dump --file=Brewfile --force
 ```
 
-Review the diff before committing — this will pick up anything installed outside of a deliberate "I want this on every machine" decision too.
+Review the diff before committing — this will pick up anything installed outside of a deliberate "I want this on every machine" decision too. Language versions themselves (Python/Node/Ruby/Rust) aren't in the Brewfile — they're managed by `asdf` and pinned in `~/.tool-versions`.
+
+## macOS preferences (`macOS.sh`)
+
+- Finder: show all file extensions, show hidden files
+- Dock: auto-hide, no delay
+- Keyboard: faster key repeat rate, shorter initial delay
+- Screenshots saved to `~/Desktop/Screenshots`
+- Natural scroll direction disabled
+- Bluetooth icon shown in the menu bar
 
 ## Known footguns
 

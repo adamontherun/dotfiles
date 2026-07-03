@@ -1,16 +1,15 @@
-
 source "${HOME}/dotfiles/.shared_prompt"
 
-PS1="\$(prompt_venv)" # virtual environment
-PS1+="\[${bold}\]\n" # newline
-PS1+="\[${userStyle}\]\u" # username
+PS1="\$(prompt_venv)"
+PS1+="\[${bold}\]\n"
+PS1+="\[${userStyle}\]\u"
 PS1+="\[${white}\] at "
-PS1+="\[${hostStyle}\]\h" # host
+PS1+="\[${hostStyle}\]\h"
 PS1+="\[${white}\] in "
-PS1+="\[${green}\]\W" # working directory
-PS1+="\$(prompt_git)" # Git repository details
+PS1+="\[${green}\]\W"
+PS1+="\$(prompt_git)"
 PS1+="\n"
-PS1+="\[${white}\]\$ \[${reset}\]" # `$` (and reset color)
+PS1+="\[${white}\]\$ \[${reset}\]"
 export PS1
 
 PS2="\[${yellow}\]→ \[${reset}\]"
