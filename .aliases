@@ -37,5 +37,3 @@ alias serve='uvicorn app.main:app --reload --host 0.0.0.0 --port 8000'
 
 # Flutter build runner watch command
 alias flutterwatch='dart run build_runner watch --delete-conflicting-outputs'
-
-alias test='pytest -p no:warnings'
