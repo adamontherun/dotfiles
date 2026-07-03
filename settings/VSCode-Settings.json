@@ -1,100 +1,143 @@
 {
-  // Recording specific settings
-  "editor.fontSize": 16, // Use 18 for Screen Recordings
-  "debug.console.fontSize": 16, // Use 18 for Screen Recordings
-  "terminal.integrated.fontSize": 16, // Use 18 for Screen Recordings
-  "window.zoomLevel": 0, // Use 3 for Screen Recordings
-
-  // Uncomment Below for Recording...
-
-  // "editor.fontSize": 18, // Use 18 for Screen Recordings
-  // "debug.console.fontSize": 18, // Use 18 for Screen Recordings
-  // "terminal.integrated.fontSize": 18, // Use 18 for Screen Recordings
-  // "window.zoomLevel": 3, // Use 3 for Screen Recordings
-  // "github.copilot.editor.enableAutoCompletions": false,
-  // "editor.quickSuggestions": {
-  //   "comments": "off",
-  //   "strings": "off"
-  //   "other": "on",
-  // },
-  // "editor.lightbulb.enabled": "off",
-  // "editor.parameterHints.enabled": false,
-  // "editor.hover.enabled": false,
-  // "editor.inlineSuggest.enabled": false,
-  // "editor.suggest.showSnippets": false,
-
-  // END - Recording specific settings
-
-  // General settings
-  "workbench.colorTheme": "Predawn",
-  "workbench.iconTheme": "ayu",
-  "editor.fontFamily": "Source Code Pro",
-  "debug.console.fontFamily": "Source Code Pro",
-  "editor.fontWeight": "500",
-  "terminal.integrated.fontWeight": "600",
-  "workbench.settings.openDefaultSettings": true,
-  "workbench.settings.useSplitJSON": true,
-  "workbench.settings.editor": "json",
-  "workbench.startupEditor": "newUntitledFile",
-  "editor.tabSize": 4,
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.quickSuggestionsDelay": 200,
-  "editor.dragAndDrop": false
-  "editor.minimap.enabled": false,
-  "diffEditor.useInlineViewWhenSpaceIsLimited": false,
-
-  // Zen Mode settings
-  "zenMode.centerLayout": false,
-  "zenMode.fullScreen": false,
-  "zenMode.hideLineNumbers": false,
-
-  // Python settings
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter",
+  "[dart]": {
+    "editor.defaultFormatter": "Dart-Code.dart-code",
     "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": "explicit"
-    }
+    "editor.rulers": [
+      80
+    ],
+    "editor.selectionHighlight": false,
+    "editor.suggest.snippetsPreventQuickSuggestions": false,
+    "editor.suggestSelection": "first",
+    "editor.tabCompletion": "onlySnippets",
+    "editor.wordBasedSuggestions": "off"
   },
-  "python.venvPath": "~/venvs",
-  "isort.args": ["--profile", "black"],
-  "pylint.args": ["--disable=C0114,C0115,C0116,C0103,C0301,W0621,W0718,W1203"],
-  "pylint.importStrategy": "fromEnvironment",
-
-  // Code Runner settings
-  "code-runner.clearPreviousOutput": true,
-  "code-runner.showExecutionMessage": false,
-  "code-runner.ignoreSelection": true,
-  "code-runner.saveFileBeforeRun": true,
-  "code-runner.executorMap": {
-    "python": "\"$pythonPath\" -u $fullFileName"
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "code-runner.enableAppInsights": false,
-
-  // Plaintext settings
-  "[plaintext]": {
-    "editor.quickSuggestions": {
-      "comments": "off",
-      "strings": "off",
-      "other": "off"
-    }
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
-  // Shell script settings
-  "[shellscript]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
-  // Notebook settings
-  "notebook.output.scrolling": true,
-  "notebook.formatOnSave.enabled": true,
-  "notebook.lineNumbers": "on",
-  "notebook.scrolling.revealNextCellOnExecute": "none",
-  "notebook.codeActionsOnSave": {
-    "source.organizeImports": true
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-
-  // SQL Tools settings
-  "sqltools.useNodeRuntime": true
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[mjml]": {
+    "editor.defaultFormatter": "attilabuti.vscode-mjml"
+  },
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+  },
+  "[python]": {
+    "diffEditor.ignoreTrimWhitespace": true,
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnType": true
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "better-phpunit.suiteSuffix": "",
+  "cloudcode.duetAI.inlineSuggestions.enableAuto": false,
+  "cloudcode.duetAI.languages": [
+    "python"
+  ],
+  "cloudcode.duetAI.project": "vaulted-gift-353422",
+  "dart.debugExternalPackageLibraries": true,
+  "dart.debugSdkLibraries": false,
+  "dart.flutterScreenshotPath": null,
+  "dart.previewFlutterUiGuides": true,
+  "dart.showInspectorNotificationsForWidgetErrors": false,
+  "dart.warnWhenEditingFilesOutsideWorkspace": false,
+  "diffEditor.renderSideBySide": true,
+  "doublebot.enableInlineEditPreview": true,
+  "editor.accessibilityPageSize": 11,
+  "editor.accessibilitySupport": "off",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit"
+  },
+  "editor.fontSize": 16,
+  "editor.formatOnSave": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.inlineSuggest.showToolbar": "always",
+  "editor.linkedEditing": true,
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.associations": {
+    "*.mjml": "mjml",
+    "*.py": "python"
+  },
+  "files.exclude": {
+    "**/__pycache__": true
+  },
+  "git.ignoreMissingGitWarning": true,
+  "git.openRepositoryInParentFolders": "never",
+  "github.copilot.advanced": {},
+  "github.copilot.editor.enableAutoCompletions": true,
+  "github.copilot.enable": {
+    "*": true,
+    "markdown": false,
+    "plaintext": false,
+    "scminput": false
+  },
+  "github.copilot.preferredAccount": "adamontherun",
+  "gitlens.advanced.messages": {
+    "suppressLineUncommittedWarning": true
+  },
+  "intelephense.diagnostics.typeErrors": false,
+  "intelephense.diagnostics.undefinedMethods": false,
+  "intelephense.diagnostics.undefinedTypes": false,
+  "javascript.suggest.paths": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.validate.enable": false,
+  "json.schemas": [],
+  "liveServer.settings.donotShowInfoMsg": true,
+  "namespaceResolver.sortAlphabetically": true,
+  "prettier.bracketSameLine": true,
+  "prettier.semi": true,
+  "prettier.singleQuote": true,
+  "prettier.useEditorConfig": false,
+  "python.defaultInterpreterPath": "/opt/homebrew/Cellar/python@3.10/3.10.9/Frameworks/Python.framework/Versions/3.10/bin/python3.10",
+  "redhat.telemetry.enabled": false,
+  "remote.SSH.defaultExtensions": [
+    "gitpod.gitpod-remote-ssh"
+  ],
+  "remote.SSH.remotePlatform": {
+    "*.gitpod.io": "linux"
+  },
+  "solidity.defaultCompiler": "localNodeModule",
+  "tailwindCSS.emmetCompletions": true,
+  "terminal.integrated.allowedLinkSchemes": [
+    "file",
+    "http",
+    "https",
+    "mailto",
+    "vscode",
+    "vscode-insiders",
+    "docker-desktop"
+  ],
+  "terminal.integrated.env.osx": {
+    "CW_NEW_SESSION": "1",
+    "Q_NEW_SESSION": "1"
+  },
+  "typescript.suggest.paths": false,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "workbench.editorAssociations": {
+    "*.mdc": "default"
+  },
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.startupEditor": "none"
 }
