@@ -1,8 +1,11 @@
 # Shortcuts
 
-
-# Detect which `ls` flavor is in use
-
+# Detect which `ls` flavor is in use and set color flag
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    colorflag="-G"
+else
+    colorflag="--color"
+fi
 
 # List all files colorized in long format, including dot files
 alias la="ls -lahF ${colorflag}"
