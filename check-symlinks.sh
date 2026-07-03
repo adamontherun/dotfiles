@@ -13,7 +13,7 @@
 ############################
 
 dotfiledir="$(cd "$(dirname "$0")" && pwd)"
-files=(zshrc zprofile zprompt bashrc bash_profile bash_prompt aliases private)
+files=(zshrc zprofile aliases private)
 
 quiet=false
 fix=false

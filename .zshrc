@@ -5,9 +5,6 @@ autoload -Uz compinit
 compinit
 # OPENSPEC:END
 
-autoload -Uz colors && colors
-setopt PROMPT_SUBST
-
 # History configuration
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
@@ -29,7 +26,7 @@ setopt rmstarsilent
 setopt no_nomatch
 
 # Load dotfiles:
-for file in ~/.{zprompt,aliases,private}; do
+for file in ~/.{aliases,private}; do
     [ -r "$file" ] && [ -f "$file" ] && source "$file"
 done
 unset file
@@ -38,6 +35,10 @@ unset file
 if command -v brew &>/dev/null; then
     . $(brew --prefix asdf)/libexec/asdf.sh
 fi
+
+# Prompt
+export STARSHIP_CONFIG="$HOME/dotfiles/starship.toml"
+eval "$(starship init zsh)"
 
 # Aliases
 alias claudeyolo='claude --dangerously-skip-permissions'

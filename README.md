@@ -6,9 +6,10 @@ Personal macOS dotfiles — shell config, VS Code settings, and a Homebrew packa
 
 ## What this manages
 
-- **zsh** (daily-driver shell): `.zshrc`, `.zprofile`, `.zprompt`
-- **bash** (minimal fallback — zsh is the real login shell, this just needs to work if something shells out to bash): `.bashrc`, `.bash_profile`, `.bash_prompt`
-- **Shared prompt logic**: `.shared_prompt` (sourced by both `.bash_prompt` and `.zprompt`)
+zsh only — it's the only shell I use interactively, so there's no bash config to keep in sync.
+
+- **zsh**: `.zshrc`, `.zprofile`
+- **Prompt**: [Starship](https://starship.rs) (`starship.toml`), config-driven instead of hand-rolled shell scripting
 - **Aliases**: `.aliases`
 - **Homebrew packages/casks/VS Code extensions/npm & uv globals**: `Brewfile`
 - **VS Code settings/keybindings**: `settings/VSCode-Settings.json`, `settings/VSCode-Keybindings.json`
@@ -42,7 +43,7 @@ export GIPHY_API_KEY='...'
 export KLIPY_API_KEY='...'
 ```
 
-It's sourced automatically by both `.zshrc` and `.bashrc`.
+It's sourced automatically by `.zshrc`.
 
 ## Updating the Brewfile
 

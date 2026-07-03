@@ -2,7 +2,7 @@
 set -e
 
 dotfiledir="$(cd "$(dirname "$0")" && pwd)"
-files=(zshrc zprofile zprompt bashrc bash_profile bash_prompt aliases private)
+files=(zshrc zprofile aliases private)
 
 echo "Changing to the ${dotfiledir} directory"
 cd "${dotfiledir}" || exit

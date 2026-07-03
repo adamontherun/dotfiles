@@ -2,20 +2,14 @@ tap "hashicorp/tap"
 tap "homebrew/services"
 tap "steipete/tap"
 tap "stripe/stripe-cli"
-# Tool for reverse engineering 3rd party, closed, binary Android apps
-brew "apktool"
 # Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
-# Nuke a whole AWS account and delete all its resources
-brew "aws-nuke"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
-# Dependency Manager for PHP
-brew "composer"
 # Cloud-native high-performance edge/middle/service proxy
 brew "envoy"
 # Play, record, convert, and stream select audio and video codecs
@@ -28,16 +22,12 @@ brew "gifsicle"
 brew "git"
 # Git extension for versioning large files
 brew "git-lfs"
-# Dex to Java decompiler
-brew "jadx"
 # Utility to optimize JPEG files
 brew "jpegoptim"
 # Open source relational database management system
 brew "mysql", restart_service: :changed
 # Robust (fully ACID) transactional property graph database
 brew "neo4j"
-# HTTP/DNS scanner configurable via YAML templates
-brew "nuclei"
 # PNG file optimizer
 brew "optipng"
 # Open-source vector similarity search for Postgres
@@ -46,8 +36,6 @@ brew "pgvector"
 brew "pngquant"
 # Fast, disk space efficient package manager
 brew "pnpm"
-# Python package management tool
-brew "poetry"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
 # Cross-platform library for audio I/O
@@ -62,10 +50,10 @@ brew "rclone"
 brew "redis", restart_service: :changed
 # Command-line interface for Render
 brew "render"
+# Cross-shell prompt for astronauts
+brew "starship"
 # Strong open-source chess engine
 brew "stockfish"
-# Subdomain discovery tool
-brew "subfinder"
 # Nodejs-based tool for optimizing SVG vector graphics files
 brew "svgo"
 # Display directories as trees (with optional color/HTML output)
@@ -153,18 +141,12 @@ cask "visual-studio-code"
 cask "zoom"
 vscode "alexcvzz.vscode-sqlite"
 vscode "alexisvt.flutter-snippets"
-vscode "amazonwebservices.codewhisperer-for-command-line-companion"
-vscode "amiralizadeh9480.laravel-extra-intellisense"
 vscode "attilabuti.vscode-mjml"
-vscode "bmewburn.vscode-intelephense-client"
 vscode "bradlc.vscode-tailwindcss"
-vscode "calebporzio.better-phpunit"
 vscode "christian-kohler.path-intellisense"
-vscode "codingyu.laravel-goto-view"
 vscode "continue.continue"
 vscode "csstools.postcss"
 vscode "cweijan.xmind-viewer"
-vscode "dansysanalyst.pest-snippets"
 vscode "dart-code.dart-code"
 vscode "dart-code.flutter"
 vscode "dbaeumer.vscode-eslint"
@@ -172,19 +154,14 @@ vscode "devmuaz.flutterhookssnippets"
 vscode "dotjoshjohnson.xml"
 vscode "dsznajder.es7-react-js-snippets"
 vscode "eamodio.gitlens"
-vscode "emallin.phpunit"
 vscode "esbenp.prettier-vscode"
 vscode "formulahendry.auto-rename-tag"
 vscode "github.copilot-chat"
 vscode "github.vscode-github-actions"
 vscode "github.vscode-pull-request-github"
-vscode "golang.go"
 vscode "jonkwheeler.styled-components-snippets"
-vscode "kleber-swf.unity-code-snippets"
 vscode "localizely.flutter-intl"
-vscode "m1guelpf.better-pest"
 vscode "mechatroner.rainbow-csv"
-vscode "mehedidracula.php-namespace-resolver"
 vscode "mikestead.dotenv"
 vscode "ms-azuretools.vscode-containers"
 vscode "ms-azuretools.vscode-docker"
@@ -198,7 +175,6 @@ vscode "ms-python.vscode-python-envs"
 vscode "ms-vscode-remote.remote-containers"
 vscode "ms-vscode-remote.remote-ssh"
 vscode "ms-vscode-remote.remote-ssh-edit"
-vscode "ms-vscode-remote.remote-wsl"
 vscode "ms-vscode-remote.vscode-remote-extensionpack"
 vscode "ms-vscode.makefile-tools"
 vscode "ms-vscode.remote-explorer"
@@ -207,21 +183,17 @@ vscode "mthuong.vscode-flutter-freezed-helper"
 vscode "naco-siren.gradle-language"
 vscode "nash.awesome-flutter-snippets"
 vscode "naumovs.color-highlight"
-vscode "onecentlin.laravel5-snippets"
-vscode "onecentlin.phpunit-snippets"
 vscode "phind.phind"
 vscode "pkief.material-icon-theme"
 vscode "planbcoding.vscode-react-refactor"
 vscode "ritwickdey.liveserver"
 vscode "robert-brunhage.flutter-riverpod-snippets"
-vscode "rodrigovallades.es7-react-js-snippets"
 vscode "simonsiefke.svg-preview"
 vscode "styled-components.vscode-styled-components"
 vscode "sumeetpardeshi.ports-manager"
 vscode "usernamehw.errorlens"
 vscode "vscjava.vscode-gradle"
 vscode "xabikos.javascriptsnippets"
-vscode "xdebug.php-debug"
 vscode "yzhang.markdown-all-in-one"
 uv "gemini-cli"
 npm "@fission-ai/openspec"
