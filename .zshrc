@@ -31,9 +31,12 @@ for file in ~/.{aliases,private}; do
 done
 unset file
 
-# asdf version manager (installed via Homebrew)
-if command -v brew &>/dev/null; then
-    . $(brew --prefix asdf)/libexec/asdf.sh
+# asdf version manager (installed via Homebrew). Sourced from Homebrew's
+# stable "opt" symlink (auto-updated by brew on upgrade) rather than
+# $(brew --prefix asdf), which spawns the brew binary on every shell
+# startup and can trigger its auto-update check.
+if [ -d /opt/homebrew/opt/asdf ]; then
+    . /opt/homebrew/opt/asdf/libexec/asdf.sh
 fi
 
 # Prompt
