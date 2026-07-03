@@ -1,87 +1,62 @@
-# Development Environment Setup
+# Adam's dotfiles
 
-This repository contains scripts and configuration files to set up a development environment for macOS. It's tailored for software development, focusing on a clean, minimal, and efficient setup.
+Personal macOS dotfiles — shell config, VS Code settings, and a Homebrew package list, managed with plain symlinks (no dotfile-manager framework).
 
-## YouTube Video Walkthrough
+## What this manages
 
-Click on the image below to watch the video on YouTube:
+- **zsh** (daily-driver shell): `.zshrc`, `.zprofile`, `.zprompt`
+- **bash** (minimal fallback — zsh is the real login shell, this just needs to work if something shells out to bash): `.bashrc`, `.bash_profile`, `.bash_prompt`
+- **Shared prompt logic**: `.shared_prompt` (sourced by both `.bash_prompt` and `.zprompt`)
+- **Aliases**: `.aliases`
+- **Homebrew packages/casks/VS Code extensions/npm & uv globals**: `Brewfile`
+- **VS Code settings/keybindings**: `settings/VSCode-Settings.json`, `settings/VSCode-Keybindings.json`
+- **A few macOS system defaults**: `macOS.sh` (Finder show-all-files/extensions, Xcode CLI tools, Rosetta)
 
-[![Watch the video](https://img.youtube.com/vi/ra5kMCXO-6I/0.jpg)](https://youtu.be/ra5kMCXO-6I)
+This repo does **not** manage: git identity (`~/.gitconfig` — `brew.sh` prompts for name/email once, only if unset), any secrets (see `.private` below), Cursor's settings (installed, but unmanaged here), or Docker Desktop/Xcode app-level preferences.
 
-## Overview
+## Fresh-machine bootstrap
 
-The setup includes automated scripts for installing essential software, configuring Bash and Zsh shells, and setting up Visual Studio Code editors. This guide will help you replicate my development environment on your machine if you desire to do so.
+Prerequisite: Xcode Command Line Tools (`macOS.sh` triggers `xcode-select --install` if they're missing — that's the only thing that has to happen before `install.sh` can run; Homebrew itself is bootstrapped by `brew.sh` if it isn't already installed).
 
-## Important Note Before Installation
+```sh
+git clone https://github.com/adamontherun/dotfiles.git ~/dotfiles
+cd ~/dotfiles
+./install.sh
+```
 
-**WARNING:** The configurations and scripts in this repository are **HIGHLY PERSONALIZED** to my own preferences and workflows. If you decide to use them, please be aware that they will **MODIFY** your current system, potentially making some changes that are **IRREVERSIBLE** without a fresh installation of your operating system.
+This symlinks the dotfiles into `$HOME`, runs `macOS.sh`, installs everything in `Brewfile` via `brew bundle`, and symlinks the VS Code settings.
 
-Furthermore, while I strive to backup files wherever possible, I cannot guarantee that all files are backed up. The backup mechanism is designed to backup SOME files **ONCE**. If the script is run more than once, the initial backups will be **OVERWRITTEN**, potentially resulting in loss of data. While I could implement timestamped backups to preserve multiple versions, this setup is optimized for my personal use, and a single backup suffices for me.
+## Secrets (`.private`)
 
-If you would like a development environment similar to mine, I highly encourage you to fork this repository and make your own personalized changes to these scripts instead of running them exactly as I have them written for myself.
+`.private` is gitignored and never committed. On a fresh machine, create it by hand (values live in your password manager, not here):
 
-A less serious (but potentially annoying) change it will make is setting the Desktop background to the image I use in my tutorials. This is the script I use to set up machines I will be recording on, after all.
+```sh
+export GIPHY_API_KEY='...'
+export KLIPY_API_KEY='...'
+```
 
-I likely won't accept pull requests unless they align closely with my personal preferences and the way I use my development environment. But if there are some obvious errors in my scripts then corrections would be welcome!
+It's sourced automatically by both `.zshrc` and `.bashrc`.
 
-If you choose to run these scripts, please do so with **EXTREME CAUTION**. It's recommended to review the scripts and understand the changes they will make to your system before proceeding.
+## Updating the Brewfile
 
-By using these scripts, you acknowledge and accept the risk of potential data loss or system alteration. Proceed at your own risk.
+`Brewfile` is a snapshot of actually-installed formulae, casks, VS Code extensions, and npm/uv globals — not a hand-maintained wishlist. To refresh it after installing or removing something:
 
-## Getting Started
+```sh
+cd ~/dotfiles
+brew bundle dump --file=Brewfile --force
+```
 
-### Prerequisites
+Review the diff before committing — this will pick up anything installed outside of a deliberate "I want this on every machine" decision too.
 
--  macOS (The scripts are tailored for macOS)
+## Known footguns
 
-### Installation
-
-1. Clone the repository to your local machine:
-   ```sh
-   git clone https://github.com/CoreyMSchafer/dotfiles.git ~/dotfiles
-   ```
-2. Navigate to the `dotfiles` directory:
-   ```sh
-   cd ~/dotfiles
-   ```
-3. Run the installation script:
-   ```sh
-   ./install.sh
-   ```
-
-This script will:
-
--  Create symlinks for dotfiles (`.bashrc`, `.zshrc`, etc.)
--  Run macOS-specific configurations
--  Install Homebrew packages and casks
--  Configure Visual Studio Code
-
-## Configuration Files
-
--  `.bashrc` & `.zshrc`: Shell configuration files for Bash and Zsh.
--  `.shared_prompt`: Custom prompt setup used by both `.bash_prompt` & `.zprompt`
--  `.bash_prompt` & `.zprompt`: Custom prompt setup for Bash and Zsh.
--  `.bash_profile: Setting system-wide environment variables
--  `.aliases`: Aliases for common commands. Some are personalized to my machines specifically (e.g. the 'yt' alias opening my YouTube Scripts')
--  `.private`: This is a file you'll create locally to hold private information and shouldn't be uploaded to version control
--  `settings/`: Directory containing editor settings and themes for Visual Studio Code.
-
-### Customizing Your Setup
-
-You're encouraged to modify the scripts and configuration files to suit your preferences. Here are some tips for customization:
-
--  **Dotfiles**: Edit `.shared_prompt`, `.zprompt`, `.bash_prompt` to add or modify shell configurations.
--  **VS Code**: Adjust settings in the `settings/` directory to change editor preferences and themes.
-
-## Contributing
-
-Feel free to fork this repository and customize it for your setup. Pull requests for improvements and bug fixes are welcome, but as said above, I likely won't accept pull requests that simply add additional brew installations or change some settings unless they align with my personal preferences.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE-MIT.txt](LICENSE-MIT.txt) file for details.
+- **The `test` alias shadows the `test`/`[` builtin.** `.aliases` defines `alias test='pytest -p no:warnings'`, so in any interactive shell, `test -e some/path` runs pytest, not the builtin. Use `command test` or `[[ ... ]]` instead.
+- **Some installers silently break the managed symlinks.** A few CLI tools "safe-save" to `~/.zshrc`/`~/.aliases`/VS Code's `settings.json` by writing a temp file and renaming it over the original — this replaces the symlink with a disconnected regular file, so edits stop round-tripping to this repo. If changes here stop taking effect (or vice versa), run `ls -la` on the file in question; if it's no longer a `-> ~/dotfiles/...` symlink, re-run the relevant `ln -sf` from `install.sh` (or `vscode.sh` for the VS Code files).
 
 ## Acknowledgments
 
--  I originally forked this from [Mathias Bynens' dotfiles](https://github.com/mathiasbynens/dotfiles)
--  Thanks to all the open-source projects used in this setup.
+Originally forked from [Mathias Bynens' dotfiles](https://github.com/mathiasbynens/dotfiles), by way of [Corey Schafer's fork](https://github.com/CoreyMSchafer/dotfiles).
+
+## License
+
+MIT — see [LICENSE-MIT.txt](LICENSE-MIT.txt).
