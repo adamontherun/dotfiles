@@ -2,12 +2,15 @@ tap "hashicorp/tap"
 tap "homebrew/services"
 tap "steipete/tap"
 tap "stripe/stripe-cli"
+tap "twilio/brew"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Bourne-Again SHell, a UNIX command interpreter
 brew "bash"
 # Dependency manager for Cocoa projects
 brew "cocoapods"
+# Select default apps for documents and URL schemes on macOS
+brew "duti"
 # Cloud-native high-performance edge/middle/service proxy
 brew "envoy"
 # Play, record, convert, and stream select audio and video codecs
@@ -22,6 +25,8 @@ brew "git"
 brew "git-lfs"
 # Utility to optimize JPEG files
 brew "jpegoptim"
+# Command-line interface to LiveKit
+brew "livekit-cli"
 # Open source relational database management system
 brew "mysql"
 # Robust (fully ACID) transactional property graph database
@@ -60,14 +65,20 @@ brew "starship"
 brew "stockfish"
 # Nodejs-based tool for optimizing SVG vector graphics files
 brew "svgo"
+# User interface to the TELNET protocol
+brew "telnet"
 # Display directories as trees (with optional color/HTML output)
 brew "tree"
+# unleash the power of Twilio from your command prompt
+brew "twilio/brew/twilio"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
 # Internet file retriever
 brew "wget"
 # Port of OpenAI's Whisper model in C/C++
 brew "whisper-cpp"
+# Generate your Xcode project from a spec file and your folder structure
+brew "xcodegen"
 # Feature-rich command-line audio/video downloader
 brew "yt-dlp"
 # UNIX shell (command interpreter)
@@ -191,5 +202,4 @@ vscode "xabikos.javascriptsnippets"
 vscode "yzhang.markdown-all-in-one"
 uv "gemini-cli"
 npm "@fission-ai/openspec"
-npm "corepack"
 npm "prettier"
