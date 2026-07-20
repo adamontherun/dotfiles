@@ -102,11 +102,6 @@ fi
 # Install Prettier, which I use in VS Code
 $(brew --prefix)/bin/npm install --global prettier || echo "Warning: Failed to install Prettier. Continuing..."
 
-# Add asdf plugins (versions themselves are pinned in ~/.tool-versions)
-for plugin in python nodejs ruby rust; do
-    asdf plugin add "$plugin" 2>/dev/null || true
-done
-
 # Install Cocoapods
 echo "Installing Cocoapods..."
 gem install cocoapods --user-install || echo "Warning: Failed to install Cocoapods. Continuing..."

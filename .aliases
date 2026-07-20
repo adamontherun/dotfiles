@@ -37,3 +37,8 @@ alias serve='uvicorn app.main:app --reload --host 0.0.0.0 --port 8000'
 
 # Flutter build runner watch command
 alias flutterwatch='dart run build_runner watch --delete-conflicting-outputs'
+
+# Keep the Mac awake until Ctrl-C (-d display, -i idle, -m disk, -s system).
+# Extra args pass through, e.g. `caf -t 3600` for a one-hour limit,
+# or `caf make build` to stay awake only for that command's duration.
+alias caf='caffeinate -dims'

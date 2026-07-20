@@ -2,8 +2,6 @@ tap "hashicorp/tap"
 tap "homebrew/services"
 tap "steipete/tap"
 tap "stripe/stripe-cli"
-# Extendable version manager with support for Ruby, Node.js, Erlang & more
-brew "asdf"
 # Official Amazon AWS command-line interface
 brew "awscli"
 # Bourne-Again SHell, a UNIX command interpreter
@@ -25,9 +23,11 @@ brew "git-lfs"
 # Utility to optimize JPEG files
 brew "jpegoptim"
 # Open source relational database management system
-brew "mysql", restart_service: :changed
+brew "mysql"
 # Robust (fully ACID) transactional property graph database
 brew "neo4j"
+# Platform built on V8 to build network applications
+brew "node"
 # PNG file optimizer
 brew "optipng"
 # Open-source vector similarity search for Postgres
@@ -41,15 +41,19 @@ brew "poppler"
 # Cross-platform library for audio I/O
 brew "portaudio"
 # Object-relational database system
-brew "postgresql@14", restart_service: :changed
+brew "postgresql@14"
 # It's not just a linter that annoys you!
 brew "pylint"
 # Rsync for cloud storage
 brew "rclone"
+# Powerful, clean, object-oriented scripting language
+brew "ruby"
 # Persistent key-value database, with built-in net interface
-brew "redis", restart_service: :changed
+brew "redis"
 # Command-line interface for Render
 brew "render"
+# Rust toolchain installer
+brew "rustup"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Strong open-source chess engine
@@ -72,12 +76,8 @@ brew "zsh"
 cask "android-platform-tools"
 # Tools for building Android applications
 cask "android-studio"
-# Web debugging Proxy application
-cask "charles"
 # Anthropic's official Claude AI desktop app
 cask "claude"
-# Terminal-based AI coding assistant
-cask "claude-code"
 # Write, edit, and chat about your code with AI
 cask "cursor"
 # Browser for SQLite databases
@@ -88,8 +88,6 @@ cask "dbeaver-community"
 cask "discord"
 # App to build and share containerised applications and microservices
 cask "docker-desktop"
-# Developer platform
-cask "dotnet-sdk"
 # UI toolkit for building applications for mobile, web and desktop
 cask "flutter"
 cask "font-lato"
@@ -105,8 +103,6 @@ cask "font-source-code-pro"
 cask "github"
 # Web browser
 cask "google-chrome"
-# Free cross-platform office suite, fresh version
-cask "libreoffice"
 # Provides updates to various Microsoft products
 cask "microsoft-auto-update"
 # Spreadsheet software
@@ -133,8 +129,6 @@ cask "tableplus"
 cask "tailscale-app"
 # Virtual machines UI using QEMU
 cask "utm"
-# Virtualiser for arm64 hardware
-cask "virtualbox"
 # Open-source code editor
 cask "visual-studio-code"
 # Video communication and virtual meeting platform

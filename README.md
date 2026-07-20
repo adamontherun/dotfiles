@@ -54,7 +54,20 @@ cd ~/dotfiles
 brew bundle dump --file=Brewfile --force
 ```
 
-Review the diff before committing — this will pick up anything installed outside of a deliberate "I want this on every machine" decision too. Language versions themselves (Python/Node/Ruby/Rust) aren't in the Brewfile — they're managed by `asdf` and pinned in `~/.tool-versions`.
+Review the diff before committing — this will pick up anything installed outside of a deliberate "I want this on every machine" decision too.
+
+## Language toolchains
+
+`asdf` was removed on 2026-07-20. Its shims sat first on `PATH` and silently shadowed real binaries — it broke `uv` outright and pinned Claude Code to a stale npm copy — and no project here ever used a `.tool-versions` file, so per-project switching bought nothing. One tool per language now:
+
+| Language | Managed by | Notes |
+|---|---|---|
+| Python | **uv** | `uv python install`, `uv venv`, `uv tool install`. Never `pip install` into a Homebrew interpreter. |
+| Node | **Homebrew** | `brew "node"`. Use `fnm` or `volta` if per-project versions are ever needed — not asdf. |
+| Ruby | **Homebrew** | `brew "ruby"`. Needs `brew link ruby`; the system Ruby is ancient. |
+| Rust | **rustup** | `brew "rustup"`, then `rustup default stable`. Keg-only, so `.zshrc` adds `/opt/homebrew/opt/rustup/bin` to `PATH`. |
+
+These four are in the Brewfile, so a rebuilt machine gets the whole toolchain.
 
 ## macOS preferences (`macOS.sh`)
 

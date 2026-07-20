@@ -31,12 +31,17 @@ for file in ~/.{aliases,private}; do
 done
 unset file
 
-# asdf version manager (installed via Homebrew). Sourced from Homebrew's
-# stable "opt" symlink (auto-updated by brew on upgrade) rather than
-# $(brew --prefix asdf), which spawns the brew binary on every shell
-# startup and can trigger its auto-update check.
-if [ -d /opt/homebrew/opt/asdf ]; then
-    . /opt/homebrew/opt/asdf/libexec/asdf.sh
+# Language toolchains. asdf was removed 2026-07-20: its shims sat first on
+# PATH and silently shadowed real binaries (it pinned Claude Code to a stale
+# npm copy and broke uv outright), and no project here used .tool-versions,
+# so per-project switching bought nothing. One tool per language instead:
+#   python -> uv          (uv python install / uv venv / uv tool install)
+#   node   -> Homebrew    (brew install node; node@20 for a fallback)
+#   ruby   -> Homebrew    (brew install ruby)
+#   rust   -> rustup      (keg-only, hence the PATH entry below)
+# If per-project node versions are ever needed, use fnm or volta, not asdf.
+if [ -d /opt/homebrew/opt/rustup/bin ]; then
+    export PATH="/opt/homebrew/opt/rustup/bin:$PATH"
 fi
 
 # Prompt
@@ -44,7 +49,8 @@ export STARSHIP_CONFIG="$HOME/dotfiles/starship.toml"
 eval "$(starship init zsh)"
 
 # Aliases
-alias claudeyolo='claude --dangerously-skip-permissions'
+# (claudeyolo removed 2026-07-20 — the `claude` CLI installs were consolidated
+# into the desktop app's own bundle, so there is no `claude` on PATH to alias.)
 
 render() {
   if [ "$1" = "logout" ]; then
@@ -56,3 +62,15 @@ render() {
 
 # Environment variables
 export AWS_PROFILE=maymont-labs-dev
+
+# ============================================================
+# PATH hygiene — keep this LAST, after everything that edits PATH.
+# `typeset -U` keeps entries unique (nested shells re-run this file and
+# would otherwise stack duplicates); the (N-/) glob drops entries that
+# aren't existing directories, e.g. the dead /pkg/env/global/bin and the
+# literal-tilde ~/.dotnet/tools that /etc/paths.d injects and zsh never
+# expands. First occurrence wins, so precedence is preserved.
+# ============================================================
+typeset -U path PATH
+path=($^path(N-/))
+export PATH
