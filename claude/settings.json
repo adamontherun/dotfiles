@@ -1,0 +1,21 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "alwaysThinkingEnabled": true,
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "preferredNotifChannel": "terminal_bell",
+  "agentPushNotifEnabled": true,
+  "voiceEnabled": true,
+  "extraKnownMarketplaces": {
+    "claude-jev": {
+      "source": {
+        "source": "github",
+        "repo": "0x7067/claude-jev"
+      }
+    }
+  }
+}

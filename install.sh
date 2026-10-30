@@ -33,6 +33,9 @@ link_all() {
     done
     link cursor/settings.json "$cursor/settings.json"
     link cursor/keybindings.json "$cursor/keybindings.json"
+    for file in settings.json CLAUDE.md; do
+        link "claude/$file" ~/.claude/"$file"
+    done
 
     if [[ -f $dotfiles/.private ]]; then
         chmod 600 "$dotfiles/.private"

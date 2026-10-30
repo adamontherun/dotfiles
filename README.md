@@ -9,6 +9,7 @@ Personal macOS setup for Python, JS/TS, Docker, Xcode and Android work, managed 
 | `Brewfile` | Packages, apps, Cursor extensions, global CLIs |
 | `config/` | git, tmux, mise and starship, linked into `~/.config` |
 | `cursor/` | Cursor settings and keybindings |
+| `claude/` | Claude Code settings and global `CLAUDE.md`, linked into `~/.claude` |
 | `install.sh` | Full setup. Safe to re-run |
 | `macOS.sh` | Firewall and system defaults |
 
@@ -20,6 +21,7 @@ Personal macOS setup for Python, JS/TS, Docker, Xcode and Android work, managed 
 - `.env` files, also gitignored: `find ~/Documents -name '.env*' -not -path '*/node_modules/*'`
 - Android upload keystores (`*.jks`, `*.keystore`) and iOS signing certs (`.p12`)
 - `~/.ssh/config`, `~/.aws/config` and `~/.config/rclone/rclone.conf`
+- `~/.claude/skills`, and `~/.claude/projects` for memory and session history
 - Local Postgres data (`pg_dumpall`) and named Docker volumes
 - Dirty or unpushed work in project repos
 
@@ -44,6 +46,7 @@ Then finish by hand:
 2. Open Android Studio once and install the SDK and its command-line tools.
 3. Add `~/.ssh/id_ed25519.pub` to GitHub and the mac mini, and remove the old Mac's key from both.
 4. Sign in to `gh`, `aws` and the apps, and copy back anything you saved from the list above.
+5. Run `claude` to sign in, reinstall plugins with `/plugin`, and re-add MCP servers with `claude mcp add`. Their tokens live in `~/.claude.json`, which stays out of the repo.
 
 Confirm FileVault is on in System Settings > Privacy & Security.
 
@@ -71,6 +74,8 @@ brew bundle cleanup --file=Brewfile         # list installed packages it doesn't
 ```
 
 If an installer replaces a symlink, `.zshrc` warns you. Run `./install.sh --links` to fix it. Any different file gets saved as `<file>.bak`.
+
+Claude Code writes through its symlink, so a settings change shows up in `git status`. Check it before committing, because this repo is public.
 
 ## Acknowledgments
 
