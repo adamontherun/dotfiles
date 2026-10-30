@@ -63,7 +63,6 @@ brew "yt-dlp"
 
 # Apps
 cask "claude"
-cask "claude-code"
 cask "cursor"
 cask "discord"
 cask "docker-desktop"
