@@ -1,10 +1,20 @@
-# Set PATHS
-if [ -x "/opt/homebrew/bin/brew" ]; then
-    export PATH="/opt/homebrew/bin:$PATH"
-fi
+# Login environment. PATH lives here, not in .zshenv, because macOS's
+# /etc/zprofile runs path_helper after .zshenv and would reorder it.
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-export PATH="$HOME/.local/bin:$PATH"
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export JAVA_HOME="/Applications/Android Studio.app/Contents/jbr/Contents/Home"
+export TF_PLUGIN_CACHE_DIR="$HOME/.terraform.d/plugin-cache"
+export AWS_PROFILE=betaacid
 
-# Some CLI installers silently replace a managed dotfile's symlink with
-# a disconnected regular file. Catch and auto-repair the safe case here.
-[ -x "$HOME/dotfiles/check-symlinks.sh" ] && "$HOME/dotfiles/check-symlinks.sh" --fix --quiet
+# rustup is keg-only, so Homebrew doesn't link it.
+path=(
+    "$HOME/.local/bin"
+    /opt/homebrew/opt/rustup/bin
+    "$ANDROID_HOME"/{platform-tools,emulator,cmdline-tools/latest/bin}
+    $path
+)
+
+# Keep this last: drop duplicates and directories that don't exist.
+typeset -U path
+path=($^path(N-/))

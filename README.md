@@ -1,82 +1,76 @@
 # Adam's dotfiles
 
-Personal macOS dotfiles — shell config, VS Code settings, and a Homebrew package list, managed with plain symlinks (no dotfile-manager framework).
+Personal macOS setup for Python, JS/TS, Docker, Xcode and Android work, managed with plain symlinks. These are highly personalized, so fork and adjust rather than running them as they are.
 
-**Note:** these are **highly personalized**. If you found this by way of the fork chain below, I'd encourage forking and adjusting rather than running it as-is — it will modify your shell config, macOS defaults, and installed software.
+| Path | What it is |
+|---|---|
+| `.zprofile` | Login environment and `PATH` |
+| `.zshrc`, `.aliases` | Interactive shell |
+| `Brewfile` | Packages, apps, Cursor extensions, global CLIs |
+| `config/` | git, tmux, mise and starship, linked into `~/.config` |
+| `cursor/` | Cursor settings and keybindings |
+| `install.sh` | Full setup. Safe to re-run |
+| `macOS.sh` | Firewall and system defaults |
 
-## What this manages
+## Before wiping a Mac
 
-zsh only — it's the only shell I use interactively, so there's no bash config to keep in sync.
+`install.sh` can't bring any of this back:
 
-- **zsh**: `.zshrc`, `.zprofile`
-- **Prompt**: [Starship](https://starship.rs) (`starship.toml`), config-driven instead of hand-rolled shell scripting
-- **Aliases**: `.aliases`
-- **Homebrew packages/casks/VS Code extensions/npm & uv globals**: `Brewfile`
-- **VS Code settings/keybindings**: `settings/VSCode-Settings.json`, `settings/VSCode-Keybindings.json`
-- **macOS system defaults**: `macOS.sh` (Finder, Dock, keyboard repeat rate, screenshot location, scroll direction, Xcode CLI tools, Rosetta)
-- **Symlink health**: `check-symlinks.sh` runs quietly at the start of every login shell (via `.zprofile`) and auto-repairs any managed dotfile whose symlink got silently replaced by a regular file with identical content — see below.
+- `~/dotfiles/.private`, which is gitignored
+- `.env` files, also gitignored: `find ~/Documents -name '.env*' -not -path '*/node_modules/*'`
+- Android upload keystores (`*.jks`, `*.keystore`) and iOS signing certs (`.p12`)
+- `~/.ssh/config`, `~/.aws/config` and `~/.config/rclone/rclone.conf`
+- Local Postgres data (`pg_dumpall`) and named Docker volumes
+- Dirty or unpushed work in project repos
 
-This repo does **not** manage Cursor's settings (installed, but unmanaged here) or Docker Desktop/Xcode app-level preferences.
-
-## Fresh-machine bootstrap
-
-Prerequisite: Xcode Command Line Tools (`macOS.sh` triggers `xcode-select --install` if they're missing — that's the only thing that has to happen before `install.sh` can run; Homebrew itself is bootstrapped by `brew.sh` if it isn't already installed).
+## Setting up a new Mac
 
 ```sh
 git clone https://github.com/adamontherun/dotfiles.git ~/dotfiles
 cd ~/dotfiles
+```
+
+Restore `.private` to `~/dotfiles/.private`, then run:
+
+```sh
 ./install.sh
 ```
 
-This symlinks the dotfiles into `$HOME`, runs `macOS.sh`, installs everything in `Brewfile` via `brew bundle` and sets Homebrew's zsh as the default shell, then symlinks the VS Code settings. Along the way it will prompt you to:
-- enter your name/email for git (skipped if already set)
-- generate an SSH key for GitHub if you don't have one at `~/.ssh/id_ed25519` (prints the public key to add to GitHub)
+It asks for your password (firewall and Homebrew), your git name and email, and creates an SSH key if there isn't one. If anything fails it says so at the end, and you can fix it and re-run.
 
-It also sets a few git defaults: `init.defaultBranch main`, `pull.rebase false`, `core.editor "code --wait"`.
+Then finish by hand:
 
-## Secrets (`.private`)
+1. Install Xcode from the App Store, then run `sudo xcodebuild -license accept`.
+2. Open Android Studio once and install the SDK and its command-line tools.
+3. Add `~/.ssh/id_ed25519.pub` to GitHub and the mac mini, and remove the old Mac's key from both.
+4. Sign in to `gh`, `aws` and the apps, and copy back anything you saved from the list above.
 
-`.private` is gitignored and never committed. On a fresh machine, create it by hand (values live in your password manager, not here):
+Confirm FileVault is on in System Settings > Privacy & Security.
 
-```sh
-export GIPHY_API_KEY='...'
-export KLIPY_API_KEY='...'
-```
+## Secrets
 
-It's sourced automatically by `.zshrc`.
+`.private` is gitignored and sourced by `.zshrc`. Keep it in your password manager as well. Git identity lives in `~/.gitconfig`, which also stays out of the repo, so `config/git/config` only holds shared defaults.
 
-## Updating the Brewfile
-
-`Brewfile` is a snapshot of actually-installed formulae, casks, VS Code extensions, and npm/uv globals — not a hand-maintained wishlist. To refresh it after installing or removing something:
-
-```sh
-cd ~/dotfiles
-brew bundle dump --file=Brewfile --force
-```
-
-Review the diff before committing — this will pick up anything installed outside of a deliberate "I want this on every machine" decision too.
-
-## Language toolchains
-
-`asdf` was removed on 2026-07-20. Its shims sat first on `PATH` and silently shadowed real binaries — it broke `uv` outright and pinned Claude Code to a stale npm copy — and no project here ever used a `.tool-versions` file, so per-project switching bought nothing. One tool per language now:
+## Languages
 
 | Language | Managed by | Notes |
 |---|---|---|
-| Python | **uv** | `uv python install`, `uv venv`, `uv tool install`. Never `pip install` into a Homebrew interpreter. |
-| Node | **Homebrew** | `brew "node"`. Use `fnm` or `volta` if per-project versions are ever needed — not asdf. |
-| Ruby | **Homebrew** | `brew "ruby"`. Needs `brew link ruby`; the system Ruby is ancient. |
-| Rust | **rustup** | `brew "rustup"`, then `rustup default stable`. Keg-only, so `.zshrc` adds `/opt/homebrew/opt/rustup/bin` to `PATH`. |
+| Python | uv | `uv python install`, `uv venv`, `uv tool install` |
+| Node | Homebrew and mise | Brew's `node` is the default. mise switches to a project's `.nvmrc`, `.node-version` or `.tool-versions`, with `mise install` for a missing version |
+| Rust | rustup | Keg-only, so `.zprofile` adds it to `PATH` |
 
-These four are in the Brewfile, so a rebuilt machine gets the whole toolchain.
+mise is set up with `mise activate`, which changes `PATH` directly and doesn't use shims. Databases run in Docker, and `libpq` provides `psql`.
 
-## macOS preferences (`macOS.sh`)
+## Keeping things current
 
-- Finder: show all file extensions, show hidden files
-- Dock: auto-hide, no delay
-- Keyboard: faster key repeat rate, shorter initial delay
-- Screenshots saved to `~/Desktop/Screenshots`
-- Natural scroll direction disabled
-- Bluetooth icon shown in the menu bar
+The `Brewfile` is hand-maintained and grouped, so don't overwrite it with `brew bundle dump`.
+
+```sh
+brew bundle add --file=Brewfile <name>      # add a package
+brew bundle cleanup --file=Brewfile         # list installed packages it doesn't mention
+```
+
+If an installer replaces a symlink, `.zshrc` warns you. Run `./install.sh --links` to fix it. Any different file gets saved as `<file>.bak`.
 
 ## Acknowledgments
 
@@ -84,4 +78,4 @@ Originally forked from [Mathias Bynens' dotfiles](https://github.com/mathiasbyne
 
 ## License
 
-MIT — see [LICENSE-MIT.txt](LICENSE-MIT.txt).
+MIT, see [LICENSE-MIT.txt](LICENSE-MIT.txt).

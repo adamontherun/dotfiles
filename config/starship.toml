@@ -6,13 +6,12 @@ $character"""
 
 add_newline = true
 
+# Username and hostname only show over SSH.
 [username]
 style_user = "bold yellow"
 format = "[$user]($style) "
-show_always = true
 
 [hostname]
-ssh_only = false
 format = "at [$hostname](bold green) in "
 
 [directory]

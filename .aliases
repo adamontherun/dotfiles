@@ -1,41 +1,17 @@
-# Shortcuts
-
-# Detect which `ls` flavor is in use and set color flag
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    colorflag="-G"
-else
-    colorflag="--color"
-fi
-
-# List all files colorized in long format, including dot files
-alias la="ls -lahF ${colorflag}"
-
-# Always use color output for `ls`
-alias ls="command ls ${colorflag}"
-# For detailed colors on Mac, run 'man ls' and see the LSCOLORS section
-export LSCOLORS='Dxexcxdxcxegedabagacad'
-export LS_COLORS='no=00:fi=00:di=04;35:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arj=01;31:*.taz=01;31:*.lzh=01;31:*.zip=01;31:*.z=01;31:*.Z=01;31:*.gz=01;31:*.bz2=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.jpg=01;35:*.jpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.avi=01;35:*.fli=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.ogg=01;35:*.mp3=01;35:*.wav=01;35:'
-
-# Always enable colored `grep` output
-# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
+# Listing
+alias ls='ls -G'
+alias la='ls -lahF'
 alias grep='grep --color=auto'
-alias fgrep='fgrep --color=auto'
-alias egrep='egrep --color=auto'
+export LSCOLORS='Dxexcxdxcxegedabagacad'
 
+# Homebrew
+alias update_brew='brew update && brew upgrade && brew cleanup'
 
-# Update/upgrade Homebrew and their installed packages
-alias update_brew='brew update; brew upgrade; brew upgrade --cask; brew cleanup'
-
-# Show/hide hidden files in Finder
-# As of macOS Sierra (10.12) and later, you can simply press Cmd + Shift + . (period) while in Finder to toggle the visibility of hidden files.
-alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
-alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
-
-# Virtual environment activation shortcut
+# Python
 alias activate='source .venv/bin/activate'
-alias serve='uvicorn app.main:app --reload --host 0.0.0.0 --port 8000'
+alias serve='uvicorn app.main:app --reload --host 127.0.0.1 --port 8000'
 
-# Flutter build runner watch command
+# Flutter
 alias flutterwatch='dart run build_runner watch --delete-conflicting-outputs'
 
 # Keep the Mac awake until Ctrl-C (-d display, -i idle, -m disk, -s system).

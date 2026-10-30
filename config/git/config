@@ -1,0 +1,19 @@
+# Shared git defaults. This file is public: name, email and anything tools
+# write belong in ~/.gitconfig, which stays on the machine and overrides this.
+[core]
+	editor = cursor --wait
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
+[push]
+	autoSetupRemote = true
+[fetch]
+	prune = true
+[merge]
+	conflictStyle = zdiff3
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

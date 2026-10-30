@@ -27,37 +27,60 @@
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[mjml]": {
-    "editor.defaultFormatter": "attilabuti.vscode-mjml"
-  },
-  "[php]": {
-    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    "editor.defaultFormatter": "mjmlio.vscode-mjml"
   },
   "[python]": {
     "diffEditor.ignoreTrimWhitespace": true,
-    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.defaultFormatter": "charliermarsh.ruff",
     "editor.formatOnType": true
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[typescriptreact]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "better-phpunit.suiteSuffix": "",
-  "cloudcode.duetAI.inlineSuggestions.enableAuto": false,
-  "cloudcode.duetAI.languages": [
-    "python"
+  "accessibility.signalOptions.volume": 0,
+  "accessibility.signals.chatResponseReceived": {
+    "sound": "off",
+    "announcement": "off"
+  },
+  "accessibility.signals.progress": {
+    "sound": "off",
+    "announcement": "off"
+  },
+  "accessibility.signals.taskCompleted": {
+    "sound": "off",
+    "announcement": "off"
+  },
+  "accessibility.signals.taskFailed": {
+    "sound": "off",
+    "announcement": "off"
+  },
+  "accessibility.signals.terminalBell": {
+    "sound": "off"
+  },
+  "accessibility.signals.terminalCommandFailed": {
+    "sound": "off",
+    "announcement": "off"
+  },
+  "cursor.cmdk.autoSelect": false,
+  "cursor.composer.queueMessageDefaultBehavior": "steer",
+  "cursor.composer.shouldAllowCustomModes": true,
+  "cursor.cpp.disabledLanguages": [
+    "markdown",
+    "scminput",
+    "terraform"
   ],
-  "cloudcode.duetAI.project": "vaulted-gift-353422",
+  "cursor.cpp.enablePartialAccepts": true,
   "dart.debugExternalPackageLibraries": true,
   "dart.debugSdkLibraries": false,
   "dart.flutterScreenshotPath": null,
   "dart.previewFlutterUiGuides": true,
   "dart.showInspectorNotificationsForWidgetErrors": false,
   "dart.warnWhenEditingFilesOutsideWorkspace": false,
+  "diffEditor.maxComputationTime": 0,
   "diffEditor.renderSideBySide": true,
-  "doublebot.enableInlineEditPreview": true,
-  "editor.accessibilityPageSize": 11,
   "editor.accessibilitySupport": "off",
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit"
@@ -76,49 +99,47 @@
   },
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
+  "explorer.confirmPasteNative": false,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
+    "*.sqlite": "${capture}.${extname}-*",
+    "*.db": "${capture}.${extname}-*",
+    "*.sqlite3": "${capture}.${extname}-*",
+    "*.db3": "${capture}.${extname}-*",
+    "*.sdb": "${capture}.${extname}-*",
+    "*.s3db": "${capture}.${extname}-*"
+  },
+  "extensions.ignoreRecommendations": true,
   "files.associations": {
-    "*.mjml": "mjml",
-    "*.py": "python"
+    "*.mjml": "mjml"
   },
   "files.exclude": {
     "**/__pycache__": true
   },
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
   "git.ignoreMissingGitWarning": true,
   "git.openRepositoryInParentFolders": "never",
-  "github.copilot.advanced": {},
-  "github.copilot.editor.enableAutoCompletions": true,
-  "github.copilot.enable": {
-    "*": true,
-    "markdown": false,
-    "plaintext": false,
-    "scminput": false
-  },
-  "github.copilot.preferredAccount": "adamontherun",
+  "githubPullRequests.createOnPublishBranch": "never",
   "gitlens.advanced.messages": {
     "suppressLineUncommittedWarning": true
   },
-  "intelephense.diagnostics.typeErrors": false,
-  "intelephense.diagnostics.undefinedMethods": false,
-  "intelephense.diagnostics.undefinedTypes": false,
   "javascript.suggest.paths": false,
   "javascript.updateImportsOnFileMove.enabled": "always",
-  "javascript.validate.enable": false,
-  "json.schemas": [],
-  "liveServer.settings.donotShowInfoMsg": true,
-  "namespaceResolver.sortAlphabetically": true,
+  "jupyter.askForKernelRestart": false,
   "prettier.bracketSameLine": true,
   "prettier.semi": true,
   "prettier.singleQuote": true,
   "prettier.useEditorConfig": false,
-  "python.defaultInterpreterPath": "/opt/homebrew/Cellar/python@3.10/3.10.9/Frameworks/Python.framework/Versions/3.10/bin/python3.10",
-  "redhat.telemetry.enabled": false,
-  "remote.SSH.defaultExtensions": [
-    "gitpod.gitpod-remote-ssh"
-  ],
   "remote.SSH.remotePlatform": {
-    "*.gitpod.io": "linux"
+    "macmini": "macOS"
   },
-  "solidity.defaultCompiler": "localNodeModule",
   "tailwindCSS.emmetCompletions": true,
   "terminal.integrated.allowedLinkSchemes": [
     "file",
@@ -129,12 +150,11 @@
     "vscode-insiders",
     "docker-desktop"
   ],
-  "terminal.integrated.env.osx": {
-    "CW_NEW_SESSION": "1",
-    "Q_NEW_SESSION": "1"
-  },
+  "terminal.integrated.enableVisualBell": false,
   "typescript.suggest.paths": false,
   "typescript.updateImportsOnFileMove.enabled": "always",
+  "update.showReleaseNotes": false,
+  "window.autoDetectColorScheme": false,
   "workbench.editorAssociations": {
     "*.mdc": "default"
   },

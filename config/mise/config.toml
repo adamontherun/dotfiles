@@ -1,0 +1,8 @@
+[settings]
+# Keep shims off PATH. mise adds them by default, and shims shadowing real
+# binaries is why asdf was removed from this setup.
+activate_shims = false
+# Read .nvmrc and .node-version as well as .tool-versions.
+idiomatic_version_file_enable_tools = ["node"]
+# uv owns Python, so ignore python entries in .tool-versions.
+disable_tools = ["python"]
