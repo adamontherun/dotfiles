@@ -1,3 +1,7 @@
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/adamsmith/.docker/bin"
+# End of Docker Desktop section.
+
 # Login environment. PATH lives here, not in .zshenv, because macOS's
 # /etc/zprofile runs path_helper after .zshenv and would reorder it.
 eval "$(/opt/homebrew/bin/brew shellenv)"
