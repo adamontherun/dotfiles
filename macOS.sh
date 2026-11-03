@@ -20,6 +20,16 @@ play_notification
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
 sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
 
+# Touch ID for sudo. sudo_local survives macOS updates, unlike /etc/pam.d/sudo.
+if [[ ! -f /etc/pam.d/sudo_local ]]; then
+    sed -e 's/^#auth/auth/' /etc/pam.d/sudo_local.template | sudo tee /etc/pam.d/sudo_local >/dev/null
+fi
+
+# Rosetta, which Docker needs to run amd64 images
+if ! /usr/bin/arch -x86_64 /usr/bin/true 2>/dev/null; then
+    sudo softwareupdate --install-rosetta --agree-to-license
+fi
+
 # Show all file extensions
 defaults write NSGlobalDomain AppleShowAllExtensions -bool true
 

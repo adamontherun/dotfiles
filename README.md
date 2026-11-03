@@ -32,23 +32,25 @@ git clone https://github.com/adamontherun/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 ```
 
-Restore `.private` to `~/dotfiles/.private`, then run:
+Restore `.private` to `~/dotfiles/.private`, then run this in a terminal:
 
 ```sh
 ./install.sh
 ```
 
-It asks for your password (firewall and Homebrew), your git name and email, and creates an SSH key if there isn't one. If anything fails it says so at the end, and you can fix it and re-run.
+It asks for your password once, then your git name and email, and opens GitHub in the browser to sign in and upload a new SSH key. It also turns on Touch ID for `sudo` and installs Rosetta. If anything fails it says so at the end, and you can fix it and re-run.
 
 Then finish by hand:
 
-1. Install Xcode from the App Store, then run `sudo xcodebuild -license accept`.
-2. Open Android Studio once and install the SDK and its command-line tools.
-3. Add `~/.ssh/id_ed25519.pub` to GitHub and the mac mini, and remove the old Mac's key from both.
-4. Sign in to `gh`, `aws` and the apps, and copy back anything you saved from the list above.
+1. Install Xcode from the App Store and open Android Studio once to create the SDK. Re-run `./install.sh`, which accepts the Xcode license, downloads the iOS simulator and adds Android's command-line tools. Then run `flutter doctor --android-licenses`.
+2. Open Docker Desktop once and let it install its helper.
+3. Sign in to Tailscale, add `~/.ssh/id_ed25519.pub` to the mac mini with `ssh-copy-id`, and remove the old Mac's key from the mini and GitHub.
+4. Run `aws login`, sign in to the apps, and copy back anything you saved from the list above.
 5. Run `claude` to sign in, reinstall plugins with `/plugin`, and re-add MCP servers with `claude mcp add`. Their tokens live in `~/.claude.json`, which stays out of the repo.
 
-Confirm FileVault is on in System Settings > Privacy & Security.
+Confirm FileVault is on in System Settings > Privacy & Security, then log out and back in so the keyboard and trackpad settings apply.
+
+To be walked through all of this, open `~/dotfiles` in Claude Code and run `/setup-mac`. It covers the gotchas as well as the steps, and checks the result at the end.
 
 ## Secrets
 
