@@ -23,3 +23,4 @@ source ~/.aliases
 eval "$(mise activate zsh)"
 eval "$(starship init zsh)"
 source <(fzf --zsh)
+export PATH=$PATH:$HOME/.maestro/bin

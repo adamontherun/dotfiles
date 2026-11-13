@@ -3,19 +3,54 @@
     "commit": "",
     "pr": ""
   },
-  "alwaysThinkingEnabled": true,
-  "tui": "fullscreen",
-  "skipDangerousModePermissionPrompt": true,
-  "skipWorkflowUsageWarning": true,
-  "preferredNotifChannel": "terminal_bell",
-  "agentPushNotifEnabled": true,
-  "voiceEnabled": true,
+  "permissions": {
+    "allow": [
+      "mcp__scheduled-tasks__delete_scheduled_task"
+    ]
+  },
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/.claude/skills/factory/hooks/jev-stop.sh",
+            "timeout": 180
+          }
+        ]
+      }
+    ]
+  },
+  "enabledPlugins": {
+    "ponytail@ponytail": true,
+    "pstack@cursor-plugins": true,
+    "skills-for-real-engineers@anthropic-plugin-directory": true
+  },
   "extraKnownMarketplaces": {
     "claude-jev": {
       "source": {
         "source": "github",
         "repo": "0x7067/claude-jev"
       }
+    },
+    "ponytail": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/dietrichgebert/ponytail.git"
+      }
+    },
+    "cursor-plugins": {
+      "source": {
+        "source": "git",
+        "url": "https://github.com/cursor/plugins.git"
+      }
     }
-  }
+  },
+  "alwaysThinkingEnabled": true,
+  "tui": "fullscreen",
+  "skipDangerousModePermissionPrompt": true,
+  "skipWorkflowUsageWarning": true,
+  "preferredNotifChannel": "terminal_bell",
+  "agentPushNotifEnabled": true,
+  "voiceEnabled": true
 }

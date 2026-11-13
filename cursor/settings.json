@@ -159,5 +159,13 @@
     "*.mdc": "default"
   },
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.startupEditor": "none"
+  "workbench.startupEditor": "none",
+"cursor.composer.queueManualSendBehavior2": "steer",
+"mcp": {
+	"servers": {
+		"notework": {
+			"url": "https://www.notework.co/api/mcp"
+		}
+	}
+}
 }
