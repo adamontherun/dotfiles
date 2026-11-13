@@ -24,7 +24,8 @@
   "enabledPlugins": {
     "ponytail@ponytail": true,
     "pstack@cursor-plugins": true,
-    "skills-for-real-engineers@anthropic-plugin-directory": true
+    "skills-for-real-engineers@anthropic-plugin-directory": true,
+    "vercel@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "claude-jev": {
