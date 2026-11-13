@@ -37,7 +37,7 @@ brew "livekit-cli"
 brew "rclone"
 brew "render"
 brew "gemini-cli"
-brew "anomalyco/tap/opencode", trusted: true
+brew "anomalyco/tap/opencode-v2", trusted: true
 brew "hashicorp/tap/terraform", trusted: true
 brew "stripe/stripe-cli/stripe", trusted: true
 brew "supabase/tap/supabase", trusted: true
