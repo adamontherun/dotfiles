@@ -4,6 +4,7 @@
 tap "anomalyco/tap"
 tap "hashicorp/tap"
 tap "oven-sh/bun"
+tap "steipete/tap"
 tap "stripe/stripe-cli"
 tap "supabase/tap"
 
@@ -51,6 +52,7 @@ cask "flutter"
 # Media
 brew "ffmpeg"
 brew "gifsicle"
+brew "steipete/tap/imsg", trusted: true   # iMessage CLI; Heather joke job and iMessage reads depend on it
 brew "jpegoptim"
 brew "optipng"
 brew "pngquant"
