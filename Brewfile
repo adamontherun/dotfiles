@@ -65,6 +65,7 @@ brew "yt-dlp"
 
 # Apps
 cask "claude"
+cask "codex"     # Codex CLI; T3 updates it with brew upgrade
 cask "cursor"
 cask "discord"
 cask "docker-desktop"

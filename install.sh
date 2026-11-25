@@ -160,13 +160,6 @@ if [[ -x ~/.local/bin/graphify && ! -d ~/.claude/skills/graphify ]]; then
     ~/.local/bin/graphify install --platform claude || failed+=("graphify skill")
 fi
 
-# ChatGPT.app includes the Codex CLI but doesn't put it on PATH; T3 and the shell need `codex`.
-codex_cli=/Applications/ChatGPT.app/Contents/Resources/codex-cli/bin/codex
-if [[ -x $codex_cli ]]; then
-    mkdir -p ~/.local/bin
-    ln -sfn "$codex_cli" ~/.local/bin/codex
-fi
-
 # Xcode comes from the App Store, so this runs on the first pass after it's in.
 if [[ -d /Applications/Xcode.app ]]; then
     if [[ $(xcode-select -p) != /Applications/Xcode.app/* ]]; then
